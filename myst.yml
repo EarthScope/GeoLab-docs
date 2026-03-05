@@ -1,0 +1,60 @@
+version: 1
+project:
+  title: GeoLab Jupyter Book
+  authors:
+    - name: EarthScope On-Ramp Project Group
+  copyright: '2024'
+  exclude:
+    - content/drafts/*
+    - content/science_tutorials/*
+  github: EarthScope/GeoLab
+  bibliography:
+    - references.bib
+  exports:
+    - format: pdf
+      template: plain_latex_book
+      output: exports/book.pdf
+  toc:
+    - file: intro.md
+    - title: Welcome
+      children:
+        - file: content/welcome/about.md
+        - file: content/welcome/mission.md
+        - file: content/welcome/geolab_CoC.md
+        - file: content/welcome/geolab_AUP.md
+        - file: content/welcome/citation.md
+        - file: content/welcome/glossary.md
+    - title: Getting Started
+      children:
+        - file: content/getting_started/register_es_user.md
+        - file: content/getting_started/register_geolab_access.md
+        - file: content/getting_started/server_launch.md
+        - file: content/getting_started/user_storage.md
+    - title: Navigate GeoLab
+      children:
+        - file: content/navigate_geolab/basic_navigation.md
+        - file: content/navigate_geolab/geolab_terminal.md
+        - file: content/navigate_geolab/How_to_Notebook.ipynb
+        - file: content/navigate_geolab/using_git.md
+    - title: Advanced Topics
+      children:
+        - file: content/advanced_topics/env_mgmt.md
+        - file: content/advanced_topics/dask.md
+    - title: Open Science Resources
+      children:
+        - file: content/other/opensci_links.md
+    - title: EarthScope Cloud Resources
+      children:
+        - url: https://docs.earthscope.org/
+          title: EarthScope Docs Home
+        - url: https://docs.earthscope.org/projects/API
+          title: EarthScope API
+        - url: https://docs.earthscope.org/projects/CLI
+          title: EarthScope CLI
+        - url: https://docs.earthscope.org/projects/SDK
+          title: EarthScope SDK
+site:
+  options:
+    logo: content/img/cloud_logo_simple_small.png
+    folders: true
+  template: book-theme
