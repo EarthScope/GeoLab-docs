@@ -2,18 +2,12 @@ version: 1
 project:
   title: GeoLab Jupyter Book
   authors:
-    - name: EarthScope On-Ramp Project Group
-  copyright: '2024'
+    - name: EarthScope Consortium
+  copyright: '2024-2026'
   exclude:
     - content/drafts/*
     - content/science_tutorials/*
   github: EarthScope/GeoLab
-  bibliography:
-    - references.bib
-  exports:
-    - format: pdf
-      template: plain_latex_book
-      output: exports/book.pdf
   toc:
     - file: intro.md
     - title: Welcome
@@ -26,8 +20,7 @@ project:
         - file: content/welcome/glossary.md
     - title: Getting Started
       children:
-        - file: content/getting_started/register_es_user.md
-        - file: content/getting_started/register_geolab_access.md
+        - file: content/getting_started/access.md
         - file: content/getting_started/server_launch.md
         - file: content/getting_started/user_storage.md
     - title: Navigate GeoLab
@@ -43,18 +36,14 @@ project:
     - title: Open Science Resources
       children:
         - file: content/other/opensci_links.md
-    - title: EarthScope Cloud Resources
-      children:
-        - url: https://docs.earthscope.org/
-          title: EarthScope Docs Home
-        - url: https://docs.earthscope.org/projects/API
-          title: EarthScope API
-        - url: https://docs.earthscope.org/projects/CLI
-          title: EarthScope CLI
-        - url: https://docs.earthscope.org/projects/SDK
-          title: EarthScope SDK
-site:
-  options:
-    logo: content/img/cloud_logo_simple_small.png
-    folders: true
-  template: book-theme
+    # - title: EarthScope Cloud Resources
+    #   children:
+    #     - url: https://docs.earthscope.org/
+    #       title: EarthScope Docs Home
+    #     - url: https://docs.earthscope.org/projects/API
+    #       title: EarthScope API
+    #     - url: https://docs.earthscope.org/projects/CLI
+    #       title: EarthScope CLI
+    #     - url: https://docs.earthscope.org/projects/SDK
+    #       title: EarthScope SDK
+
