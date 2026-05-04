@@ -1,13 +1,10 @@
 version: 1
+extends:
+  #TODO: update this after CloudDocs merge to main
+  - https://github.com/EarthScope/CloudDocs/blob/4872c34dc7c503edd936fb69cccf86b218d7127f/es_config/earthscope.yml
 project:
   title: GeoLab Jupyter Book
-  authors:
-    - name: EarthScope Consortium
-  copyright: '2024-2026'
-  exclude:
-    - content/drafts/*
-    - content/science_tutorials/*
-  github: EarthScope/GeoLab
+  github: EarthScope/GeoLab-docs
   toc:
     - file: intro.md
     - title: Welcome
