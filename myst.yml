@@ -1,7 +1,8 @@
 version: 1
 extends:
   #TODO: update this after CloudDocs merge to main
-  - https://github.com/EarthScope/CloudDocs/blob/4872c34dc7c503edd936fb69cccf86b218d7127f/es_config/earthscope.yml
+  - https://raw.githubusercontent.com/EarthScope/CloudDocs/refs/heads/jb2/es_config/earthscope.yml
+  # - ../CloudDocs/es_config/earthscope.yml
 project:
   title: GeoLab Jupyter Book
   github: EarthScope/GeoLab-docs
@@ -33,14 +34,3 @@ project:
     - title: Open Science Resources
       children:
         - file: content/other/opensci_links.md
-    # - title: EarthScope Cloud Resources
-    #   children:
-    #     - url: https://docs.earthscope.org/
-    #       title: EarthScope Docs Home
-    #     - url: https://docs.earthscope.org/projects/API
-    #       title: EarthScope API
-    #     - url: https://docs.earthscope.org/projects/CLI
-    #       title: EarthScope CLI
-    #     - url: https://docs.earthscope.org/projects/SDK
-    #       title: EarthScope SDK
-
