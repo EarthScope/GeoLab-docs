@@ -2,11 +2,12 @@
   publish = "publish"
   command = """
     pip install -r requirements.txt && \
-    cd docs && jupyter book build --html && \
-    mkdir -p ../publish/onramp/geolab && \
-    mv _build/html/* ../publish/onramp/geolab/
+    jupyter book build --html && \
+    mkdir -p publish/onramp/geolab && \
+    mv _build/html/* publish/onramp/geolab/
   """
 
 [build.environment]
   BASE_URL = "/onramp/geolab"
   PYTHON_VERSION = "3.12"
+
