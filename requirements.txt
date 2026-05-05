@@ -1,4 +1,1 @@
-jupyter-book<2.0.0
-matplotlib
-numpy
-sphinx == 6.2.1
+jupyter-book>=2
