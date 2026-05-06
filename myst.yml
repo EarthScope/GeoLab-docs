@@ -1,7 +1,6 @@
 version: 1
 extends:
-  #TODO: update this after CloudDocs merge to main
-  - https://raw.githubusercontent.com/EarthScope/CloudDocs/refs/heads/jb2/es_config/earthscope.yml
+  - https://raw.githubusercontent.com/EarthScope/CloudDocs/main/es_config/earthscope.yml
   # - ../CloudDocs/es_config/earthscope.yml
 project:
   title: GeoLab Jupyter Book
@@ -10,27 +9,27 @@ project:
     - file: intro.md
     - title: Welcome
       children:
-        - file: content/welcome/about.md
-        - file: content/welcome/mission.md
-        - file: content/welcome/geolab_CoC.md
-        - file: content/welcome/geolab_AUP.md
-        - file: content/welcome/citation.md
-        - file: content/welcome/glossary.md
+        - file: welcome/about.md
+        - file: welcome/mission.md
+        - file: welcome/geolab_CoC.md
+        - file: welcome/geolab_AUP.md
+        - file: welcome/citation.md
+        - file: welcome/glossary.md
     - title: Getting Started
       children:
-        - file: content/getting_started/access.md
-        - file: content/getting_started/server_launch.md
-        - file: content/getting_started/user_storage.md
+        - file: getting_started/access.md
+        - file: getting_started/server_launch.md
+        - file: getting_started/user_storage.md
     - title: Navigate GeoLab
       children:
-        - file: content/navigate_geolab/basic_navigation.md
-        - file: content/navigate_geolab/geolab_terminal.md
-        - file: content/navigate_geolab/How_to_Notebook.ipynb
-        - file: content/navigate_geolab/using_git.md
+        - file: navigate_geolab/basic_navigation.md
+        - file: navigate_geolab/geolab_terminal.md
+        - file: navigate_geolab/How_to_Notebook.ipynb
+        - file: navigate_geolab/using_git.md
     - title: Advanced Topics
       children:
-        - file: content/advanced_topics/env_mgmt.md
-        - file: content/advanced_topics/dask.md
+        - file: advanced_topics/env_mgmt.md
+        - file: advanced_topics/dask.md
     - title: Open Science Resources
       children:
-        - file: content/other/opensci_links.md
+        - file: other/opensci_links.md
