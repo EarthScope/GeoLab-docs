@@ -1,3 +1,6 @@
+# Building this repo with Python requirements.txt and Jupyter Book
+# (as opposed to using Node.js and mystmd) in case we want to use some
+# other Python packages such as notebooks in the future.
 [build]
   publish = "publish"
   command = """
