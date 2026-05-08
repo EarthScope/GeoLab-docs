@@ -12,7 +12,6 @@ project:
         - file: welcome/mission.md
         - file: welcome/geolab_CoC.md
         - file: welcome/geolab_AUP.md
-        - file: welcome/citation.md
         - file: welcome/glossary.md
     - title: Getting Started
       children:
@@ -32,3 +31,4 @@ project:
     - title: Open Science Resources
       children:
         - file: other/opensci_links.md
+    - file: help.md
