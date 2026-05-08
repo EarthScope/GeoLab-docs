@@ -8,10 +8,11 @@ GeoLab is a JupyterHub built for the global communities of geophysical researche
 
 This JupyterBook is meant to provide basic information about account registration, best practices while using the hub, and some simple tutorials to get you started.
 
-Learn more about GeoLab, hosted by EarthScope, by visiting [this link](https://www.earthscope.org/data/geolab/) or by contacting us at: data-help (at) earthscope.org
+Learn more about GeoLab, hosted by EarthScope, by visiting [this link](https://www.earthscope.org/data/geolab/) or by contacting us at: help@earthscope.org
 
 ```{admonition} Quick links
 :class: seealso
-* GeoLab JupyterHub: {{ jupyterhub_url }}
-* GitHub Repository: {{ geolab_github_url }}
+* [Launch GeoLab](https://www.earthscope.org/data/geolab/)
+* [GeoLab Infrastructure GitHub Repository](https://github.com/EarthScope/GeoLab)
+* [GeoLab Learning Hub](https://github.com/EarthScope/GeoLab-learning-hub)
 ```
