@@ -3,13 +3,21 @@
 # other Python packages such as notebooks in the future.
 [build]
   publish = "publish"
-  command = """
+  # The `sed` step strips an `/index.html`->`/` redirect <script> that mystmd
+  # injects as the first child of <head> (see PR jupyter-book/mystmd#2825).
+  # That script ends up *before* the <meta charSet> that React's SSR rendered
+  # as the first head child, so when Remix hydrates it walks the DOM, finds a
+  # <script> where it expected <meta>, throws React error #418, tears down the
+  # SSR tree, and re-renders client-only -- which is the visible white flash.
+  # Removing the script makes the SSR/client trees agree and hydration succeeds.
+  command = '''
     pip install -r requirements.txt && \
     jupyter book build --html && \
+    find _build/html -name 'index.html' -exec sed -i 's|<script>(function(){var p=window\.location\.pathname;[^<]*})();</script>||g' {} + && \
     mkdir -p publish$BASE_URL && \
     mv _build/html/* publish$BASE_URL/ && \
     printf '/  %s/  301\n' "$BASE_URL" > publish/_redirects
-  """
+  '''
 
 [build.environment]
   BASE_URL = "/geolab"
