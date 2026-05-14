@@ -31,3 +31,6 @@ project:
       children:
         - file: other/opensci_links.md
     - file: help.md
+site:
+  options:
+    style: ./custom.css
