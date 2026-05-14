@@ -16,7 +16,7 @@
 
     git clone --depth 1 --branch toc-baseurl-hydration \
       https://github.com/chad-earthscope/myst-theme.git ../myst-theme-fork
-    (cd ../myst-theme-fork && bun install && make build-book)
+    (cd ../myst-theme-fork && bun install && bun run build && make build-book)
 
     myst --version
     myst build --html
