@@ -9,7 +9,6 @@ project:
     - title: Welcome
       children:
         - file: welcome/about.md
-        - file: welcome/mission.md
         - file: welcome/geolab_CoC.md
         - file: welcome/geolab_AUP.md
         - file: welcome/glossary.md
