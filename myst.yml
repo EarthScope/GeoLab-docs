@@ -33,3 +33,8 @@ project:
     - title: Open Science Resources
       children:
         - file: other/opensci_links.md
+# Use locally-built fork of book-theme (built by netlify.toml from
+# https://github.com/chad-earthscope/myst-theme branch toc-baseurl-hydration).
+# Remove once jupyter-book/myst-theme ships the upstream fix.
+site:
+  template: ../myst-theme-fork/.deploy/book/template.yml
