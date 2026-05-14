@@ -10,6 +10,9 @@
     export PATH="$HOME/.bun/bin:$PATH"
     bun --version
 
+    # Netlify caches the parent build dir across runs, so wipe any prior clones.
+    rm -rf ../mystmd-fork ../myst-theme-fork
+
     git clone --depth 1 --branch index-redirect-hydration \
       https://github.com/chad-earthscope/mystmd.git ../mystmd-fork
     (cd ../mystmd-fork && bun install && bun run build && bun run link)
