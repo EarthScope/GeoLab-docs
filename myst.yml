@@ -33,3 +33,6 @@ project:
     - title: Open Science Resources
       children:
         - file: other/opensci_links.md
+site:
+  options:
+    style: ./custom.css
