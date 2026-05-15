@@ -1,9 +1,8 @@
 # Navigating GeoLab and its File System
 
-GeoLab is designed to look and feel like a familiar IDE. Here's a quick tour:
+GeoLab is designed to look and feel like a familiar python IDE. Here's a quick tour:
 
 ![Landing](../img/geolab_nav.png)
-
 
 ## Main Panel:
 The Main Panel is home to the Launcher, where you can launch all of GeoLab's connected apps. From here, you can open new python notebooks, terminal consoles, and text/markdown files. 
