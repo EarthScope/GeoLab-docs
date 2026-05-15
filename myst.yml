@@ -17,6 +17,7 @@ project:
         - file: getting_started/access.md
         - file: getting_started/server_launch.md
         - file: getting_started/user_storage.md
+        - file: getting_started/quotas.md
     - title: Navigate GeoLab
       children:
         - file: navigate_geolab/basic_navigation.md
@@ -31,6 +32,14 @@ project:
       children:
         - file: other/opensci_links.md
     - file: help.md
+  plugins:
+    - https://github.com/choldgraf/myst-substitutions/releases/download/v0.1/index.mjs
+  substitutions:
+    geolab_home:  "https://www.earthscope.org/data/geolab/"
+    resource_request_form: "[NGF Data Platform Resource Request Form](https://support.center.earthscope.org/servicedesk/customer/portal/4/group/31/create/608)"
+    geolab_github: "[GeoLab github](https://github.com/EarthScope/GeoLab/tree/main/geolab-default)"
+    course_offerings: "https://www.earthscope.org/education/skill-building-learning/courses/"
+    user_accounts: "https://docs.earthscope.org/user-account/"
 site:
   options:
     style: ./custom.css
