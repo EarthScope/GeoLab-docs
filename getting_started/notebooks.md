@@ -1,4 +1,4 @@
-# Working with Notebooks in GeoLab
+# Working with Notebooks
 
 Jupyter Notebooks are interactive documents that combine live code, equations, visualizations, and narrative text. They are the primary way most users work in GeoLab.
 
@@ -42,19 +42,7 @@ print("Hello, GeoLab!")
 
 Markdown cells contain formatted text — useful for explaining your workflow, adding section headers, and documenting results. Change a cell to Markdown using the dropdown in the toolbar, or press **Esc then M** when a cell is selected.
 
-Common Markdown syntax:
-
-| Element | Syntax |
-|---|---|
-| Heading | `# H1`, `## H2`, `### H3` |
-| Bold | `**bold**` |
-| Italic | `*italic*` |
-| Inline code | `` `code` `` |
-| Code block | ```` ```python ... ``` ```` |
-| Link | `[text](URL)` |
-| Image | `![alt text](path/to/image.png)` |
-| Unordered list | `- item` |
-| Ordered list | `1. item` |
+See this [guide to Markdown Syntax](https://www.markdownguide.org/basic-syntax/) to help you format your Markdown Cells. 
 
 Double-click a rendered Markdown cell to edit it. Run it again to render.
 
@@ -74,6 +62,42 @@ Double-click a rendered Markdown cell to edit it. Run it again to render.
 
 For the full list, go to **Help → Show Keyboard Shortcuts**.
 
+## The Kernel
+
+Notebooks don't run quite like python scripts. In a Python script, the interpreter runs your code top-to-bottom and exits. In a notebook, a **kernel** is the persistent Python process running in the background while your notebook is open. The kernel remembers every variable, function, and import from every cell you've run, in whatever order you ran them. This is the most important conceptual difference from scripting: **cell order on the page doesn't matter; execution order does.** 
+
+### Kernel status
+The kernel status indicator appears in the top-right corner of the notebook:
+- **○ (empty circle)** — idle, ready to run
+- **● (filled circle)** — busy, currently executing
+
+Each cell also shows its execution status in brackets on the left:
+- `[ ]` — not yet run this session
+- `[*]` — currently running
+- `[4]` — completed (number reflects execution order)
+
+### Interrupting a running cell
+If a cell is taking too long or stuck in a loop, stop it with **Kernel → Interrupt Kernel**, or press **I, I** in command mode. This is the notebook equivalent of `Ctrl+C` in a terminal. Your variables are preserved.
+
+### Restarting the kernel
+Restarting clears all variables and imports from memory, giving you a clean Python session. This is the fastest fix for unexpected behavior caused by running cells out of order.
+
+| Action | Effect |
+|---|---|
+| **Kernel → Restart Kernel** | Clears memory; leaves cell outputs visible |
+| **Kernel → Restart Kernel and Clear All Outputs** | Clears memory and output |
+| **Kernel → Restart Kernel and Run All Cells** | Clears memory, then reruns the notebook top-to-bottom |
+
+Use **Restart and Run All** before sharing a notebook to confirm it runs correctly in order.
+
+### Shutting down kernels
+
+Closing a notebook tab does **not** shut down the kernel — it keeps running in the background. When you're done with a notebook, shut down its kernel explicitly:
+
+- While the notebook is open: **Kernel → Shut Down Kernel**
+- From the ![usage icon](../img/usage_monitor.png) Usage Browser: find the kernel under **Running Kernels** and click **Shut Down**
+- To stop all at once: **Kernel → Shut Down All Kernels**
+
 ## Saving Your Work
 
 Jupyter autosaves periodically, but you should save manually before closing a notebook: **Ctrl + S**, or **File → Save Notebook**.
@@ -88,16 +112,6 @@ To export a notebook to another format (HTML, PDF, etc.):
 2. Select your desired format.
 
 PDF export requires LaTeX to be available in your environment.
-
-## Installing Packages
-
-If you need a package that isn't included in the default GeoLab image, install it at the start of your session using `%pip` or `%conda` in a code cell:
-
-```python
-%pip install packagename
-```
-
-Note that installations are **ephemeral** — they apply only to your current session and will not persist after you log out. See [Environment Management](../advanced_topics/env_mgmt.md) for details on persistent options.
 
 ## Best Practices
 
@@ -117,6 +131,7 @@ Try **Kernel → Interrupt Kernel** first. If that doesn't work, restart the ker
 
 **Cluttered or very large cell output**
 Right-click the output area and select **Clear Output**, or use **Edit → Clear All Outputs**.
+Suppress a cell's outputs by adding `%%capture` to the beginning of the cell. 
 
 **Wrong environment or missing packages**
-Confirm you launched GeoLab with the correct image. See [Launching your Server](./server_launch.md).
+Confirm you launched GeoLab with the correct environment. See [Launching your Server](./server_launch.md).

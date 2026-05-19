@@ -4,8 +4,8 @@ GeoLab is designed to look and feel like a familiar python IDE. Here's a quick t
 
 ![Landing](../img/geolab_nav.png)
 
-## Main Panel:
-The Main Panel is home to the Launcher, where you can launch all of GeoLab's connected apps. From here, you can open new python notebooks, terminal consoles, and text/markdown files. Custom images may offer additional widgets here.
+## Main Panel
+The Main Panel is home to the Launcher, where you can launch all of GeoLab's connected apps. From here, you can open new python notebooks, terminal consoles, and text/markdown files. Custom environment images may offer additional widgets here.
 
 There are several ways to reach the Launcher:
 - Click the blue **+** button in the top left of the sidebar 
@@ -15,7 +15,7 @@ There are several ways to reach the Launcher:
 Like many IDEs, tabs within the main panel can be stacked or split-screen in multiple configurations. Simply click and drag each tab to reorganize your view. 
 
 ## Sidebar
-The sidebar contains several tabs that will help you navigate the GeoLab environment and its extensions. Some images may contain extensions that differ from the ones described here. 
+The sidebar contains several tabs that will help you navigate the GeoLab environment and its extensions. Some environments may contain extensions that differ from the ones described here. 
 
 ### File Browser
 ![folder icon](../img/folder.png) The file browser points to your `/home/jovyan` directory, which persists across sessions regardless of which server options you select at login.
@@ -48,5 +48,5 @@ Standard file operations (i.e., rename, delete, copy, paste, open, etc) are avai
 
 (resource-monitor)=
 ### Resource Monitor
-Images with the jupyter-resource-usage extension installed allow you to view your resource utilization at the bottom status bar.
-![resource](../img/jupyter-resource-usage.png)
+Environments with the jupyter-resource-usage extension installed allow you to view your resource utilization at the bottom status bar.
+<!-- ![resource](../img/jupyter-resource-usage.png) -->

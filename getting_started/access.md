@@ -13,4 +13,4 @@ Beginning in June 2026, GeoLab access will be enabled for all EarthScope user ac
 
 Navigate to the [GeoLab Home Page]( {{ geolab_home }} ) and click the 'Launch GeoLab' button. 
 
-When the login screen appears, use the same method that you used to register for your EarthScope User account (email & password, OR "Continue with..."). Once your identity has been confirmed, you will be take to the Server Options screen. 
+When the login screen appears, use the same method that you used to register for your EarthScope User account (email & password, OR "Continue with..."). Once your identity has been confirmed, you will be taken to the Server Options screen. 
