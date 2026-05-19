@@ -19,7 +19,7 @@ project:
         - file: getting_started/server_launch.md
         - file: getting_started/basic_navigation.md
         - file: getting_started/geolab_terminal.md
-        - file: getting_started/How_to_Notebook.md
+        - file: getting_started/notebooks.md
         - file: getting_started/using_git.md
         - file: getting_started/user_storage.md
         - file: getting_started/quotas.md
@@ -27,9 +27,7 @@ project:
       children:
         - file: advanced_topics/env_mgmt.md
         - file: advanced_topics/dask.md
-    - title: Open Science Resources
-      children:
-        - file: other/opensci_links.md
+        - file: advanced_topics/nbgitpuller.md
     - file: help.md
   plugins:
     - https://github.com/choldgraf/myst-substitutions/releases/download/v0.1/index.mjs
@@ -40,6 +38,3 @@ project:
     course_offerings: "https://www.earthscope.org/education/skill-building-learning/courses/"
     user_accounts: "https://docs.earthscope.org/user-account/"
 
-site:
-  options:
-    style: ./custom.css
