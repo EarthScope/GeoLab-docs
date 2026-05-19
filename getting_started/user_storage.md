@@ -24,7 +24,7 @@ Please note the following storage limits on ``/home/jovyan``:
 
 To see how much disk space you are using, use the command below from any Terminal window:
 
-`du -sh --exclude=="shared*" ~/`
+`du -sh --exclude="shared*" ~/`
 Alternatively, you can naviate to File -> Hub Control Panel, select the 'Usage' tab from the top right, and explore your storage as a [Quota-enforced](./quotas.md) resource.
 
 If you exceed the 50 GB limit, your current session will remain active but your processes will not be able to write to storage. This may result in your server instance crashing. To remedy this, start another server instance and immediately reduce your disk usage. If you are unable to restart a server after multiple attempts, please reach out to the GeoLab admins by sending an email to help@earthscope.org for assistance.

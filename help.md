@@ -31,4 +31,4 @@ This path is most effective for the following types of problems:
 Please note that EarthScope admins are IT professionals, not research scientists. We are not able to provide with individual research code debugging. 
 
 ## We welcome your feedback! 
-Pleae provide your thoughts on the future of GeoLab by filling out our Community Feedback Form.
+Please provide your thoughts on the future of GeoLab by filling out our Community Feedback Form.
