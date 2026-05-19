@@ -12,18 +12,17 @@ project:
         - file: welcome/geolab_CoC.md
         - file: welcome/geolab_AUP.md
         - file: welcome/glossary.md
-    - title: Getting Started
+    - file: getting_started/index.md
+      title: Getting Started
       children:
         - file: getting_started/access.md
         - file: getting_started/server_launch.md
+        - file: getting_started/basic_navigation.md
+        - file: getting_started/geolab_terminal.md
+        - file: getting_started/How_to_Notebook.md
+        - file: getting_started/using_git.md
         - file: getting_started/user_storage.md
         - file: getting_started/quotas.md
-    - title: Navigate GeoLab
-      children:
-        - file: navigate_geolab/basic_navigation.md
-        - file: navigate_geolab/geolab_terminal.md
-        - file: navigate_geolab/How_to_Notebook.ipynb
-        - file: navigate_geolab/using_git.md
     - title: Advanced Topics
       children:
         - file: advanced_topics/env_mgmt.md
@@ -40,6 +39,7 @@ project:
     geolab_github: "[GeoLab github](https://github.com/EarthScope/GeoLab/tree/main/geolab-default)"
     course_offerings: "https://www.earthscope.org/education/skill-building-learning/courses/"
     user_accounts: "https://docs.earthscope.org/user-account/"
+
 site:
   options:
     style: ./custom.css
