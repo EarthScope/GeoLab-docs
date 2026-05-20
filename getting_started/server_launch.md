@@ -22,8 +22,8 @@ The [Jupyter SciPy](https://jupyter-docker-stacks.readthedocs.io/en/latest/using
 GeoLab in R is available via a [rocker geospatial image](https://rocker-project.org/images/versioned/binder.html). EarthScope does not currently provide support or geophysical package extensions for this image.
 ```
 
-```{dropdown} Short Course Images
-EarthScope supports educational short courses hosted in GeoLab throughout the year. If you are attending one of these workshops, select the image for your course. Short Course images are temporary and may be modified or removed without notice. You can learn more about EarthScope's short course offerings [here]({{ course_offerings }}).
+```{dropdown} Technical Short Course Images
+The NSF NGF supports educational short courses hosted in GeoLab throughout the year. If you are attending one of these workshops, select the image for your course. Technical Short Course environments are temporary and may be modified or removed without notice. You can learn more about the NSF NGF's technical short course offerings [here]({{ course_offerings }}).
 ```
 
 ```{dropdown} Other...

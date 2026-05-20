@@ -1,6 +1,6 @@
 # File Systems and Data Storage
 
-GeoLab offers several file storage options described below. These storage locations are for storing data processing results, intermediate data products, notebooks, etc. These locations are not for long term storage. We strongly recommend using data in EarthScope repositories directly through programmatic access without making a copy.
+GeoLab offers several file storage options described below. These storage locations are for storing data processing results, intermediate data products, notebooks, etc. These locations are not for long term storage. We strongly recommend using data in NSF NGF repositories directly through programmatic access without making a copy.
 
 ## User home directories (aka folders)
 

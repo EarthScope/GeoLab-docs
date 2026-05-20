@@ -23,6 +23,7 @@ project:
         - file: getting_started/using_git.md
         - file: getting_started/user_storage.md
         - file: getting_started/quotas.md
+        - file: getting_started/examples_tutorials.md
     - title: Advanced Topics
       children:
         - file: advanced_topics/env_mgmt.md
@@ -35,6 +36,10 @@ project:
     geolab_home:  "https://www.earthscope.org/data/geolab/"
     resource_request_form: "[NGF Data Platform Resource Request Form](https://support.center.earthscope.org/servicedesk/customer/portal/4/group/31/create/608)"
     geolab_github: "[GeoLab github](https://github.com/EarthScope/GeoLab/tree/main/geolab-default)"
+    learning_hub: "https://github.com/EarthScope/GeoLab-learning-hub"
     course_offerings: "https://www.earthscope.org/education/skill-building-learning/courses/"
+    cloud_foundations: "https://www.courses.earthscope.org"
     user_accounts: "https://docs.earthscope.org/user-account/"
+    help: "help@earthscope.org"
+    discourse: "add link to myst.yml"
 
