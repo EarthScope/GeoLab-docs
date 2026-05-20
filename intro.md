@@ -1,14 +1,8 @@
-# Welcome to GeoLab by EarthScope Consortium!
+# Welcome to GeoLab!
 
-```{note}
-This documentation is in development as we launch the GeoLab project.
-```
+A component of the NSF National Geophysical Facility, GeoLab is a JupyterHub built for the global communities of geophysical researchers, educators, and engineers. EarthScope operates GeoLab in partnership with the International Interactive Computing Collaboration [2i2c](https://2i2c.org/). This interactive cloud-computing platform supports the geophysical research community's development of domain knowledge and expertise in open-source and cloud-based projects.
 
-GeoLab is a JupyterHub built for the global communities of geophysical researchers, educators, and engineers that are supported by the NSF National Geophysical Facility operated by EarthScope. In partnership with the International Interactive Computing Collaboration [2i2c](https://2i2c.org/), GeoLab aims to establish an interactive cloud-computing platform to develop community domain knowledge and expertise in open-source and cloud-based projects.
-
-This documentation is meant to provide basic information about getting started in GeoLab and best practices while using the hub. Tutorials and examples to get you started are located in the GeoLab Learning Hub, linked below. 
-
-Learn more about GeoLab, hosted by EarthScope, by visiting [this link](https://www.earthscope.org/data/geolab/) or by contacting us at: help@earthscope.org
+This documentation provides basic information about getting started in GeoLab and best practices while using the hub. Tutorials and examples to get you started are located in the GeoLab Learning Hub, linked below. 
 
 ```{admonition} Quick links
 :class: seealso

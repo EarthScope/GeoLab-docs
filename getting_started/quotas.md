@@ -1,6 +1,6 @@
 # Resource Quotas
 
-EarthScope enforces resource utilization quotas to ensure fair access to compute resources and to ensure we can continue to operate GeoLab at no cost to users. 
+Resource utilization quotas are implemented to ensure fair access to compute resources and to ensure we can continue to operate GeoLab at no cost to users. 
 
 See [2i2c's documentation of Usage Quotas](https://jupyterhub-usage-quotas.readthedocs.io/en/latest/tutorial/quickstart/#users) for more details on checking your resource utilization and remaining available compute.
 Please note that usage is calculated and quotas replenished on a rolling 30-day window, and there can be some delay between using compute in GeoLab and it refreshing in the Usage dashboard. 

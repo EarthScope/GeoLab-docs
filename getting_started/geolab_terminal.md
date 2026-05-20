@@ -13,6 +13,6 @@ Clicking the **X** on a terminal tab closes the tab but does not stop the proces
 
 
 ## User `jovyan` and Root Privileges
-Your default path `:~` in the Terminal window refers to `/home/jovyan`. This is prefaced by the user id, or `jovyan@jupyter-your-unique-account-identification-number` which is tied to your email or Google/Cilogon profile. Due to EarthScope's authentication implementation, there is no convenient way to shorten this path prefix in the terminal display. 
+Your default path `:~` in the Terminal window refers to `/home/jovyan`. This is prefaced by the user id, or `jovyan@jupyter-your-unique-account-identification-number` which is tied to your email or Google/Cilogon profile. Due to the NSF NGF's authentication implementation, there is no convenient way to shorten this path prefix in the terminal display. 
 
 `Jovyan` users do not have administrator or root permissions, and therefore cannot use the `sudo` command to override system commands.
