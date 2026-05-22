@@ -6,4 +6,4 @@ See [2i2c's documentation of Usage Quotas](https://jupyterhub-usage-quotas.readt
 Please note that usage is calculated and quotas replenished on a rolling 30-day window, and there can be some delay between using compute in GeoLab and it refreshing in the Usage dashboard. 
 
 
-It is our intention to provide a base level of resource access that meets most researchers' needs. If you find that you are running out of compute quota credits and wish to request more, please fill out the {{ resource_request_form }} with a thorough description of your project approach and compute needs. 
+<!-- It is our intention to provide a base level of resource access that meets most researchers' needs. If you find that you are running out of compute quota credits and wish to request more, please fill out the {{ resource_request_form }} with a thorough description of your project approach and compute needs.  -->
