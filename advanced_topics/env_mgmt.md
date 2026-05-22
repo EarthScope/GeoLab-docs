@@ -1,13 +1,24 @@
 # Environment Management
 GeoLab images include many commonly used geophysics tools, but we cannot include everything. Additional software and packages can be installed by users in GeoLab, with two options:
-1. Ephemeral Installation: Due to the ephemeral nature of the JupyterHub servers, packages installed on the server will only be valid for your current session and will not persist from one session to another. You will need to reinstall them each time you log back in to GeoLab. 
+1. Ephemeral Installation: Due to the ephemeral nature of the JupyterHub servers, packages installed on the server will only be valid for your current session and will not persist from one session to another. You will need to reinstall them each time you log back in to GeoLab, or add them to your notebooks as magic commands.
 2. Use a Custom Image: If you need to use the same software repeatedly, during multiple sessions, or for multiple users, you can create your own software environment and load it at launch time.  
 
 ## 1. Ephemeral Installation
 ### Installing python packages
- Use `pip` or `conda` to install the package yourself at the beginning of your session, either by typing the below in a GeoLab Terminal, or including it in the first cell of your Jupyter notebook.
-  - `%pip install packagename` or `%conda install packagename`
-    - The `%pip` / `%conda` forms here are better than their `!pip` / `!conda` counterparts to ensure that the package is installed to the correct directory.
+ Use `pip` or `conda` to install the package yourself at the beginning of your session by typing the below in a GeoLab Terminal.
+```
+pip install pkgname
+conda install pkgname
+```
+
+Because installations are ephemeral, we recommend adding these commands to your python notebooks using a magic command. This will allow the python notebook to run the bash command, and ensure you re-install the right packages each time you return to your project without having to remember to type it in the terminal.  
+
+You can add a magic command to the beginning of your notebook. The `%pip` / `%conda` forms here are better than their `!pip` / `!conda` counterparts to ensure that the package is installed to the correct directory.
+
+```
+%pip install pkgname
+```
+    
 
 ### Installing from a requirements file
 
