@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The GeoLab JupyterHub environment provided by EarthScope is a **shared computing resource** intended to support **geophysical research, education, and collaboration**. This Acceptable Use Policy establishes guidelines for **ethical, respectful, and responsible** use of the system.
+The GeoLab JupyterHub environment provided by the EarthScope-operated NSF National Geophysical Facility is a **shared computing resource** intended to support **geophysical research, education, and collaboration**. This Acceptable Use Policy establishes guidelines for **ethical, respectful, and responsible** use of the system.
 
 ## Acceptable Use and Resource Management
 
@@ -42,13 +42,13 @@ The GeoLab JupyterHub environment provided by EarthScope is a **shared computing
 
 ## Incident Response & Reporting Violations
 
-- Users should immediately report suspected security breaches, unauthorized access, or system misuse to the designated EarthScope GeoLab administrator.
+- Users should immediately report suspected security breaches, unauthorized access, or system misuse to an EarthScope GeoLab administrator.
 - Violations of this Use Policy may result in:
   - A warning for minor infractions.
   - Temporary suspension of access for repeated or serious violations.
   - Permanent revocation of access for severe offenses.
 
-Reports can be made to EarthScope administrators via email: geolab@earthscope.org (geolab_admin?)
+Reports can be made to EarthScope administrators via email: help@earthscope.org
 
 ## Updates & Amendments
 
