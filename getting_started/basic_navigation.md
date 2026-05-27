@@ -46,7 +46,6 @@ Standard file operations (i.e., rename, delete, copy, paste, open, etc) are avai
 
 ## Footer
 
-(resource-monitor)=
 ### Resource Monitor
 Environments with the jupyter-resource-usage extension installed allow you to view your resource utilization at the bottom status bar.
 <!-- ![resource](../img/jupyter-resource-usage.png) -->
