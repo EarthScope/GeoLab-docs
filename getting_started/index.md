@@ -17,3 +17,5 @@ To get going in GeoLab, you'll need to:
     - [File Systems and Data Storage](./user_storage.md) — Understand your storage options and limits.
     - [Resource Quotas](./quotas.md) — How compute credits work and how to manage your usage.
 6. Get stuck? [Ask for help!](../help.md)
+
+**Want something more structured? All of this material and more is covered in our FREE, self-paced online course, [Cloud Foundations](./examples_tutorials.md/#cloud-foundations)** 
