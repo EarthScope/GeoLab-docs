@@ -33,8 +33,8 @@ project:
     - https://github.com/choldgraf/myst-substitutions/releases/download/v0.1/index.mjs
   substitutions:
     geolab_home: "https://www.earthscope.org/data/geolab/"
-    resource_request_form: "[NGF Data Platform Resource Request Form](https://support.center.earthscope.org/servicedesk/customer/portal/4/group/31/create/608)"
-    geolab_github: "[GeoLab github](https://github.com/EarthScope/GeoLab/)"
+    resource_request_form: "[NSF NGF Data Platform Resource Request Form](https://support.center.earthscope.org/servicedesk/customer/portal/4/group/31/create/608)"
+    geolab_github: "(https://github.com/EarthScope/GeoLab/)"
     learning_hub: "https://github.com/EarthScope/GeoLab-learning-hub"
     course_offerings: "https://www.earthscope.org/education/skill-building-learning/courses/"
     cloud_foundations: "https://www.courses.earthscope.org"

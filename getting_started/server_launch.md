@@ -4,10 +4,10 @@ GeoLab offers several cloud server configurations. Use the menu options on this 
 ![image](../img/server_options.png)
 
 ## Select an Environment
-Several pre-configured compute environments are available. Please see [Environment Management](../advanced_topics/env_mgmt.md) for details on customizing your environment after launch or bringing your own image.
+Several pre-configured compute environments are available from the dropdown menu. Please see [Environment Management](../advanced_topics/env_mgmt.md) for details on customizing your environment after launch or bringing your own image.
 
 ```{dropdown} GeoLab
-The default GeoLab image contains a variety of Python packages for a broad range of geophysical data analysis. It inherits all software in [pangeo/pangeo_notebook](https://github.com/pangeo-data/pangeo-docker-images/tree/d0ea2af694e5f6a27c04abd046620fcf5bebf126/pangeo-notebook), with additional support for the EarthScope SDK/CLI and other geophysics tools. For a complete list of packages, see the {{ geolab_github }}.
+The default GeoLab image contains a variety of Python packages for a broad range of geophysical data analysis. It inherits all software in [pangeo/base_image](https://github.com/pangeo-data/pangeo-docker-images/base_image), with additional support for the EarthScope SDK/CLI and other geophysics tools. For a more thorough description of the image, see the GeoLab github {{ geolab_github }}.
 ```
 
 ```{dropdown} SeaFloor Geodesy
