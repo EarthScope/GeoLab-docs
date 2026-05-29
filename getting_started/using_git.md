@@ -18,7 +18,8 @@ Once you've logged into GeoLab, you can use git from the command line in the ter
 There is also a visual git GUI extension available by clicking the git icon ![Git icon](../img/git_icon.png) on the left sidebar. 
 
 ## Connecting Accounts
-If you have a github or gitlab account and wish to sync projects to it from GeoLab, you will need to run a few configuration steps.  
+If you have a github or gitlab account and wish to sync projects to it from GeoLab, you will need to run a few configuration steps. 
+**Note, git account setup is not required to clone a public repository.** 
 
 ### 1. Tell git who you are
 In the terminal, run the following commands:
@@ -29,7 +30,7 @@ git config --global user.email "your_email@example.com"
 You'll only need to do this once. Your configs will be stored to a file if you ever need to modify them.
 
 :::{note}
-Using the `--global` flag will apply these settings to every git project in your GeoLab account. If you have multiple git identities and wish to use a different identity for a specific project, run the commands above _inside the specific project folder_, without the `--global` flag.
+Using the `--global` flag will apply these settings to every git repository in your GeoLab account. If you have multiple git identities and wish to use a different identity for a specific project, run the commands above _inside the specific project folder_, without the `--global` flag.
 :::
 
 ### 2. Authenticate

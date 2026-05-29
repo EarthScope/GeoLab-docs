@@ -33,4 +33,4 @@ This path is most effective for the following types of problems:
 Please note that EarthScope admins are IT professionals, not research scientists. For support with individual research code debugging, please use the appropriate support threads on Community Forum. 
 
 ## We welcome your feedback! 
-Please [email us](help) or reach out on the forum if you'd like to provide immediate feedback on the platform. We also conduct regular user feedback surveys, so keep your eye on your inbox for opportunities to help shape the future of the platform. 
+Please email the helpdesk or reach out on the forum if you'd like to provide immediate feedback on the platform or our documentation. We also conduct regular user feedback surveys, so keep your eye on your inbox for opportunities to help shape the future of the platform. 
