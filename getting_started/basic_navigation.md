@@ -42,11 +42,10 @@ Standard file operations (i.e., rename, delete, copy, paste, open, etc) are avai
 ![JupyterBook icon](../img/jb_icon.png) Some cloned repositories may included JupyterBook documentation. Browse those docs here, without leaving GeoLab.
 
 ### JupyterLab Extension Manager
-![extension manager icon](../img/extension_icon.png) Browse and install community-developed JupyterLab extensions.
+![extension manager icon](../img/extension_icon.png) Browse and install open-source JupyterLab extensions.
 
 ## Footer
 
-(resource-monitor)=
 ### Resource Monitor
 Environments with the jupyter-resource-usage extension installed allow you to view your resource utilization at the bottom status bar.
 <!-- ![resource](../img/jupyter-resource-usage.png) -->
