@@ -6,7 +6,8 @@ This documentation provides basic information about getting started in GeoLab an
 
 ```{admonition} Quick links
 :class: seealso
-* [Launch GeoLab](https://www.earthscope.org/data/geolab/)
-* [GeoLab Infrastructure GitHub Repository](https://github.com/EarthScope/GeoLab)
-* [GeoLab Learning Hub](https://github.com/EarthScope/GeoLab-learning-hub)
+* [Launch GeoLab]( {{ geolab_home }} )
+* [GeoLab Infrastructure GitHub Repository]({{ geolab_github }}) 
+* [GeoLab Learning Hub]( {{ learning_hub }} )
+* [Community Forum]({{ discourse }})
 ```
