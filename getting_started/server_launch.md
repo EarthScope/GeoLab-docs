@@ -14,13 +14,13 @@ The default GeoLab image contains a variety of Python packages for a broad range
 This image is intended for processing GNSS-A/Seafloor Geodesy data. It is built on Ubuntu 20.04 and includes PRIDE-PPPAR, GARPOS, and the EarthScope `es-sfgtools` package. For more information, see the [es-sfgtools documentation](https://es-sfgtools.readthedocs.io/en/latest/index.html).
 ```
 
-```{dropdown} Jupyter
+<!-- ```{dropdown} Jupyter
 The [Jupyter SciPy](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html#jupyter-scipy-notebook) image is a minimalist configuration available to all JupyterHubs, without geophysics-specific tools. Appropriate for introductory Python learning or as a clean base to build from.
 ```
 
 ```{dropdown} R Studio
 GeoLab in R is available via a [rocker geospatial image](https://rocker-project.org/images/versioned/binder.html). EarthScope does not currently provide support or geophysical package extensions for this image.
-```
+``` -->
 
 ```{dropdown} Technical Short Course Images
 The NSF NGF supports educational short courses hosted in GeoLab throughout the year. If you are attending one of these workshops, select the image for your course. Technical Short Course environments are temporary and may be modified or removed without notice. You can learn more about the NSF NGF's technical short course offerings [here]({{ course_offerings }}).
