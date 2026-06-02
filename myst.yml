@@ -37,7 +37,7 @@ project:
     geolab_github: "(https://github.com/EarthScope/GeoLab/)"
     learning_hub: "https://github.com/EarthScope/GeoLab-learning-hub"
     course_offerings: "https://www.earthscope.org/education/skill-building-learning/courses/"
-    cloud_foundations: "https://www.courses.earthscope.org"
+    cloud_foundations: "https://courses.earthscope.org"
     user_accounts: "https://docs.earthscope.org/user-account/"
     help: "help@earthscope.org"
     discourse: "https://earthscope.discourse.group"
