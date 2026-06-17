@@ -34,27 +34,22 @@ Using the `--global` flag will apply these settings to every git repository in y
 :::
 
 ### 2. Authenticate
-Depending on how your git accounts are configured, you may need to provide authentication when syncing code to/from your remote repository.
 
-#### Option 1 - enter your password every time you make a push to your remote. 
-
-#### Option 2 - set up an SSH key.
-
-An SSH key allows you to authenticate without entering your password each time. The steps to set up your SSH key are as follows:
+An SSH key lets you authenticate with your remote repository securely and without entering your password each time. The steps to set up your SSH key are as follows:
 
 1. **Generate SSH Key**
 
-    In your terminal, run:
+    In the GeoLab terminal, run:
 
     ```shell
     ssh-keygen -t ed25519 -C "your_email@example.com"
     ```
 
-    When prompted, press `Enter` to accept the default file location. You can optionally set a passphrase or leave it empty for no passphrase.
+    When prompted, press `Enter` to accept the default file location. The default location is in the `/home/jovyan/` directory, which persists between GeoLab logins. You can optionally set a passphrase or leave it empty for no passphrase.
 
 2. **Copy your public key**
 
-    Display your public key using the following command in terminal:
+    Display your public key using the following command in the GeoLab terminal:
 
     ```shell
     cat ~/.ssh/id_ed25519.pub
@@ -80,13 +75,19 @@ An SSH key allows you to authenticate without entering your password each time. 
     ```shell
     ssh -T git@github.com
     ```
+    Expected output:
+
+    Hi `your_username` ! You've successfully authenticated, but GitHub does not provide shell access.
+
     *For GitLab:*
 
     ```shell
     ssh -T git@gitlab.com
     ```
 
-    You should see a success message confirming your identity.
+    Expected output:
+
+    Welcome to GitLab, `@your_username`!
 
 ## Best Practices
 - Avoid nested repository cloning (cloning a repository inside another repository), and keep all your clones in a single directory — `/home/jovyan/` is a good choice.
