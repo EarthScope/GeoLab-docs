@@ -26,6 +26,9 @@ project:
     - title: Advanced Topics
       children:
         - file: advanced_topics/env_mgmt.md
+        - file: advanced_topics/environments/managing_environments.md
+        - file: advanced_topics/environments/building_custom_images.md
+        - file: advanced_topics/environments/binder-for-images.md
         - file: advanced_topics/dask.md
         - file: advanced_topics/nbgitpuller.md
     - file: help.md
