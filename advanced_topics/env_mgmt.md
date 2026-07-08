@@ -7,6 +7,8 @@ When you open GeoLab and select an environment when starting your server, you la
 * [Bring Your Own Image:](#bring-your-own-image) Many other organizations (e.g, NASA, NOAA) maintain their own JupyterHub compute environment images. Many of these will run in GeoLab. 
 
 ## Ephemeral Installation
+For detailed instructions for installing packages in GeoLab see the [guide](./environments/managing_environments.md)
+
 ### Installing python packages
  Use `pip` or `conda` to install the package yourself at the beginning of your session by typing the below in a GeoLab Terminal.
 ```
@@ -57,15 +59,14 @@ Some software can be installed via the terminal using `apt-get`. Please be advis
 Most GeoLab images have `gcc`, `g++`, and `gfortran` compilers installed. You will need to move your makefiles into your home directory and compile them within GeoLab. 
 
 ## Create a Custom Image
-:::{attention} Section Under Development!
-:::
+You can build a custom own image using our existing image as a template. This strategy is an advanced approach for software with complex installations, and only recommended for users with some prior knowledge of building containers.
 
-EarthScope is working to build more comprehensive documentation on custom image creation. In the mean time, please see: 
+Follow the instructions for building a custom image in this [guide](./environments/building_custom_images.md).
 
-- [2i2c guide to binderhub](https://docs.2i2c.org/user/environment/dynamic-imagebuilding/#user-environment-building) - This strategy is an option if you want to use an environment file that extends the base GeoLab image with additional python packages, but don't want to re-install it every time (i.e., with an environment file). You can specify your environment file once to generate a stable container, and load that at launch time. Note, there's a 15-20 minute overhead to build the image in binderhub the first time and any time you change the environment file, so you'll need to consider whether this will save you time in the long run. 
+## Binder for Images
+[2i2c guide to binderhub](https://docs.2i2c.org/user/environment/dynamic-imagebuilding/#user-environment-building) - This strategy is an option if you want to use an environment file that extends the base GeoLab image with additional python packages, but don't want to build and host an image. You can specify your environment file once to generate a stable container, and load that at launch time. Note, there's a 15-20 minute overhead to build the image in GeoLab the first time and any time you change the environment file, you will need to consider whether this will save you time in the long run.
 
-- If you need to make extensive software changes, you can build your own image using our existing image as a template. Instructions are located in the `README.md` file in the [GeoLab GitHub repository.]({{ geolab_github }}) You will need to clone the repository, modify the build files to suit your needs, build your container and upload it to a public container registry like DockerHub or AWS ECR, and then select it as 'Other' from the dropdown when you [launch your GeoLab server](../getting_started/server_launch.md). This strategy is an advanced approach for software with complex installations, and only recommended for users with some prior knowledge of building docker containers.
+Follow the instructions to deploy a custom image from a GitHub repository using binder in this [guide](./environments/binder_for_images.md).
 
 ## Bring Your Own Image
 Many other organizations (e.g., NASA, NOAA, Pangeo, The Rocker Project, etc) maintain JupyterHub images with their software installed. Many of these will run in GeoLab (but we make no guarantees that images built for other platforms will work here!) We recommend using these images interdisciplinary research, where you may need software installed in another image, but want to run it on data stored in the NSF NGF archive. At [Server Launch](../getting_started/server_launch.md#select-an-environment), select the 'Other' option from the Environment dropdown and enter the URL to the public image.
- 
