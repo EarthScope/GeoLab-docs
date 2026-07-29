@@ -17,7 +17,7 @@ Compute hours are calculated based on your server size and the up-time of your s
 - Running the default 4GB server for two hours will expend approximately 8GiB hours against your quota.
 - Running a 29GB server for one hour will use 29GiB.
 
-Compute hours represent real costs for the Facility, so please be mindful to use the smallest resources that make sense for the task at hand, and shut down your server when not in use.
+Compute hours represent real costs for the NSF National Geophysical Facility, so please be mindful to use the smallest resources that make sense for the task at hand, and shut down your server when not in use.
 
 Compute quotas are accrued and replenished over a rolling 30-day window. Please note that there is some delay between using compute time in GeoLab and it refreshing in the Usage Dashboard. 
 
