@@ -135,15 +135,15 @@ python -m ipykernel install --user --name my_environment --display-name "Python 
 
 1. Open a notebook and go to **Kernel > Change Kernel…**
 
-   ![Kernel menu showing the Change Kernel option](./images/select_kernel.png)
+   ![Kernel menu showing the Change Kernel option](../../img/select_kernel.png)
 
 2. Select **Python (my_environment)**.
 
-   ![Kernel selector dialog with custom environment listed](./images/select_custom.png)
+   ![Kernel selector dialog with custom environment listed](../../img/select_custom.png)
 
 3. Check the upper-right corner of the notebook to confirm the kernel changed.
 
-   ![Notebook header showing the active custom environment kernel](./images/custom_env.png)
+   ![Notebook header showing the active custom environment kernel](../../img/custom_env.png)
 
 > **Note:** This must be done for each notebook separately. There isn't a way to set it as the default for all notebooks.
 

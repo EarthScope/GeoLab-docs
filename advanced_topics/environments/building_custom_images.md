@@ -218,7 +218,7 @@ Each package gets a pass or fail. If something fails, it usually means a package
 
 ---
 
-## Step 4: Publish Your Image
+## Step 4: Publish Your Image to Docker Hub
 
 Once the local test passes, rebuild the image for GeoLab's platform and push it to a Container Registry.
 
