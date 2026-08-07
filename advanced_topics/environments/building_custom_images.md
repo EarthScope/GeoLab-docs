@@ -1,6 +1,6 @@
 # Building a Custom GeoLab Image
 
-A GeoLab image is a complete, prepackaged computing environment, including Python, JupyterLab, and all the scientific packages your project needs, bundled together so anyone can run them. When you start a GeoLab session, it launches from an image. This guide walks you through building your own.
+A GeoLab image is a complete, prepackaged computing environment that runs in JupyterLab, it includes common geophysics Python and scientific packages bundled together. Starting a GeoLab session launches an image. This step-by-step guide walks through building an image with a customized environment.
 
 ---
 
@@ -8,45 +8,37 @@ A GeoLab image is a complete, prepackaged computing environment, including Pytho
 
 Think of an **image** as a recipe and a **container** as a meal made from that recipe. The recipe doesn't change; you can make the same meal over and over. GeoLab does the same thing: it takes your image and launches a fresh session from it every time.
 
-You define the image by editing a few plaintext files that list what you want installed. A tool called Docker reads those files and builds the image. You then publish it so GeoLab can access it.
+Install Python packages in an image by editing a plaintext files that list the required software. A tool called `Docker` reads those files and builds the image. The image must be publish in an image repository so GeoLab can access it. Here is the process 
 
 ```text
-Config files  →  Docker builds  →  Image  →  GeoLab runs it
+Edit config files  →  Docker builds  →  Image  → Push image to repository →  GeoLab runs it
 ```
 
 ---
 
-## Before You Start
+## Before Starting
 
-You need two things installed on **your computer**:
+Two pieces of software must be installed on **your computer**:
 
 1. **Docker Desktop**, download it at [docker.com](https://www.docker.com/products/docker-desktop/). Install it on your computer, open it and leave it running in the background.
-2. **Git**, to download the template.
+2. **Git client**,to download the GeoLab Dockerfile template. Use the operating system's package manager to install a git client.
 
-You also need a **GitHub** account at [github.com](https://github.com), where you'll publish your image using the GitHub Container Registry (`ghcr.io`). If you already use GitHub for code, you can use the same account.
-
-Before you can push images, you need a **Personal Access Token (PAT)** with package permissions:
-
-1. Go to **GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic)**.
-2. Click **Generate new token (classic)**.
-3. Give it a name (e.g. `geolab-image`), set an expiration, and check the **`write:packages`** scope.
-4. Click **Generate token** and copy it, as you won't be able to see it again.
-
-Save your token somewhere safe (a password manager works well). You'll use it to log in to the registry in Step 4.
-
-Verify Docker is working by opening a terminal and running:
+Verify Docker and git are installed and working by opening a terminal and running:
 
 ```bash
 docker --version
+git --version
 ```
 
-If it prints a version number, you're good to go.
+If they print a version number, they are installed and working.
+
+In addition to the required software, a **GitHub** account at [github.com](https://github.com), a Docker account, or an AWS account is needed for publishing the image and making it available for GeoLab.
 
 ---
 
 ## Step 1: Get the Template
 
-EarthScope provides a starter template. Download it and set up your working folder:
+EarthScope provides a starter template. Download it using git to set up a working folder:
 
 ```bash
 git clone --depth 1 https://github.com/EarthScope/GeoLab.git
@@ -54,7 +46,7 @@ cp -R GeoLab/geolab-base my-geolab-image
 cd my-geolab-image
 ```
 
-Your `my-geolab-image` folder contains these files:
+The `my-geolab-image` folder contains these files:
 
 ```text
 my-geolab-image/
@@ -67,7 +59,7 @@ my-geolab-image/
 └── test_notebook.ipynb ← interactive version of the smoke test
 ```
 
-> **The only files you need to edit are `environment.yml`, `requirements.txt`, and `apt.txt`.** Everything else is set up for you.
+> **The only files to edit are `environment.yml`, `requirements.txt`, and `apt.txt`.** Everything else is set up for you.
 
 ---
 
@@ -75,7 +67,7 @@ my-geolab-image/
 
 ### `environment.yml`: Your Main Package List
 
-This is where you add Python packages. Open the file and add packages under the `dependencies` section:
+Add conda Python packages from `conda-forge`here. Open the file and add packages under the `dependencies` section:
 
 ```yaml
 channels:
@@ -93,15 +85,15 @@ dependencies:
   - my-package-name
 ```
 
-Use conda packages whenever you can, as conda checks that everything works together before installing.
+Conda packages are preferred, because conda checks that everything works together before installing and reduces the possibility of dependency conflicts among packages.
 
 ### `requirements.txt`: Packages Only on PyPI
 
-Some packages aren't available through conda and must be installed from PyPI. Add them here, one per line:
+Some packages aren't available through conda-forge and must be installed from PyPI. Add them here, one per line:
 
 ```text
 earthscope-sdk==1.4.1
-my-pypi-package
+seisbench
 ```
 
 ### `apt.txt`: System Software (Rarely Needed)
@@ -117,7 +109,7 @@ git
 
 ## Step 3: Build and Test Locally
 
-Before publishing, build the image on your own computer and make sure everything works.
+Before publishing, build the image on your computer and make sure everything works.
 
 **Build the image:**
 
@@ -125,9 +117,9 @@ Before publishing, build the image on your own computer and make sure everything
 docker build -f Dockerfile --tag my-geolab-image:0.1.0 .
 ```
 
-This reads your config files and assembles the image. It can take several minutes the first time.
+This reads the config files and assembles the image. It can take several minutes the first time.
 
-**Run it:**
+**Run it locally:**
 
 ```bash
 docker run --rm -p 8888:8888 my-geolab-image:0.1.0
@@ -139,14 +131,87 @@ Look in the output for a line like:
 http://127.0.0.1:8888/lab?token=...
 ```
 
-Copy that URL into a browser. You'll see a JupyterLab session running from your image.
+Copy that URL into a browser and a JupyterLab session will open.
 
-**Test that your packages installed correctly:**
+**Optional: Test that your packages installed correctly:**
 
-Open a terminal inside JupyterLab (File → New → Terminal) and run:
+In JupyterLab session, test if a package was installed and functions as expected. A simple version check is often sufficient to determine if a package has been installed and working.
 
-```bash
-pytest test_packages.py -v
+To test a package in a notebook environment, open a notebook and add this code to a cell:
+
+```python
+import importlib
+import shutil
+import subprocess
+import sys
+
+RESULTS = []
+
+
+def py(modname, alias=None, smoke=None):
+    """Import `modname` and optionally run `smoke(mod)` as a sanity check."""
+    label = alias or modname
+    try:
+        mod = importlib.import_module(modname)
+        if smoke is not None:
+            smoke(mod)
+        version = getattr(mod, '__version__', '')
+        RESULTS.append((label, 'OK', str(version), ''))
+    except Exception as exc:
+        RESULTS.append((label, 'FAIL', '', f'{type(exc).__name__}: {exc}'))
+
+
+def cli(cmd, version_flag='--version'):
+    """Verify `cmd` is on $PATH and responds to a version flag."""
+    path = shutil.which(cmd)
+    if not path:
+        RESULTS.append((cmd, 'FAIL', '', 'not on $PATH'))
+        return
+    try:
+        r = subprocess.run([cmd, version_flag],
+                           capture_output=True, text=True, timeout=10)
+        line = (r.stdout or r.stderr).strip().splitlines()
+        version = line[0] if line else 'on PATH'
+        RESULTS.append((cmd, 'OK', version[:80], ''))
+    except Exception as exc:
+        RESULTS.append((cmd, 'OK', 'on PATH', f'{type(exc).__name__}'))
+
+
+print(f'Python {sys.version}')
+print(f'sys.prefix: {sys.prefix}')
+```
+
+Open another cell and use either the `py` or `cli` functions to test a packaged. For example:
+
+```python
+py('earthscope_sdk', alias='earthscope-sdk')
+cli('es') # earthscope-cli entry point
+```
+
+Open a new cell and add the following code to summarize the results of the test.
+
+```python
+import pandas as pd
+from IPython.display import display
+
+df = pd.DataFrame(RESULTS,
+                  columns=['package', 'status', 'version', 'error'])
+
+passed = int((df['status'] == 'OK').sum())
+total = len(df)
+failed = total - passed
+
+print(f'Results: {passed}/{total} OK, {failed} failed')
+if failed:
+    print('\nFailures:')
+    for _, row in df[df['status'] == 'FAIL'].iterrows():
+        print(f"  {row['package']:35s}  {row['error']}")
+
+df.style.map(
+    lambda v: ('color: red; font-weight: bold' if v == 'FAIL'
+               else 'color: green'),
+    subset=['status']
+)
 ```
 
 Each package gets a pass or fail. If something fails, it usually means a package name is misspelled or a version is unavailable, so go back to `environment.yml` and fix it, then rebuild.
@@ -155,37 +220,35 @@ Each package gets a pass or fail. If something fails, it usually means a package
 
 ## Step 4: Publish Your Image
 
-Once the local test passes, rebuild the image for GeoLab's platform and push it to the GitHub Container Registry.
+Once the local test passes, rebuild the image for GeoLab's platform and push it to a Container Registry.
 
 **Rebuild for GeoLab's platform:**
+
+GeoLab uses linux/amd64 images. Depending on your computer operating system (Windows or macOS), you may have to rebuild the imaged for the linux/amd64 platform. In addition, the image must be published in an image repository that is accessible to GeoLab.
+
+If you have created an account using Docker Desktop, pushing an image to Docker Hub, the Docker image repository, does not require additional authentication. `Tag` or name the image with your Docker user name and the name of the image.
 
 ```bash
 docker build --no-cache -f Dockerfile \
   --platform linux/amd64 \
-  --tag ghcr.io/your-github-username/my-geolab-image:0.1.0 .
+  --tag your-docker-username/my-geolab-image:0.1.0 .
 ```
-
-Replace `your-github-username` with your GitHub username.
 
 > **Why `--platform linux/amd64`?** GeoLab runs on Linux. If you're on a Mac with Apple Silicon, your local machine uses a different architecture. This flag ensures the image works on GeoLab regardless of what you built it on.
 
-**Log in to the GitHub Container Registry and push:**
+**Push the Image to Docker Hub:**
 
 ```bash
-echo YOUR_GITHUB_TOKEN | docker login ghcr.io -u your-github-username --password-stdin
-docker push ghcr.io/your-github-username/my-geolab-image:0.1.0
+docker push your-docker-username/my-geolab-image:0.1.0
 ```
 
-Replace `YOUR_GITHUB_TOKEN` with the token you created in the prerequisites and `your-github-username` with your GitHub username.
+By default, images published to the Docker Hub are public and available for use with GeoLab.
 
-**Make the image public:**
+### Publishing to GitHub or AWS Image Repositories
 
-By default, images published to the GitHub Container Registry are private. GeoLab needs to be able to pull it, so you must make it public:
+Alternatives to Docker Hub include GitHub Container Registry (ghcr) or AWS Elastic Container Registry (ECR). Choosing an imagery depends on user requirements. GitHub features a tight integration with CI (Continuous Integration) through GitHub actions that can trigger an image build and push to ghcr. This automates the process of building and pushing an image through a `pull request`. AWS ECR offers cloud scale uploads and downloads to support multiple instances of GeoLab requests by 100s or more users.
 
-1. Go to your GitHub profile and click **Packages**.
-2. Click on `my-geolab-image`.
-3. Click **Package settings** (bottom of the right sidebar).
-4. Scroll to the **Danger Zone** and click **Change visibility → Public**.
+Both ghcr and ECR have more stringent authorization practices and controls over publicly available images. For a step-by-step walkthrough for pushing images to either repository, go to [Pushing Images to GitHub or AWS ECR](./pushing_to_ghcr_ecr.md) for detailed instructions.
 
 ---
 
@@ -231,3 +294,14 @@ docker push ghcr.io/your-github-username/my-geolab-image:0.1.1
 | Test packages | `pytest test_packages.py -v` in the container terminal |
 | Build for GeoLab | `docker build --no-cache --platform linux/amd64 --tag ghcr.io/username/image:version .` |
 | Publish | `docker push ghcr.io/username/my-geolab-image:0.1.0` |
+
+
+
+Before you can push images, you need a **Personal Access Token (PAT)** with package permissions:
+
+1. Go to **GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic)**.
+2. Click **Generate new token (classic)**.
+3. Give it a name (e.g. `geolab-image`), set an expiration, and check the **`write:packages`** scope.
+4. Click **Generate token** and copy it, as you won't be able to see it again.
+
+Save your token somewhere safe (a password manager works well). You'll use it to log in to the registry in Step 4.

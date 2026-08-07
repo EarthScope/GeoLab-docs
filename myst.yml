@@ -23,12 +23,14 @@ project:
         - file: getting_started/user_storage.md
         - file: getting_started/quotas.md
         - file: getting_started/examples_tutorials.md
-    - title: Advanced Topics
+    - file: advanced_topics/environments/index.md
+      title: Advanced Topics
       children:
-        - file: advanced_topics/env_mgmt.md
+        - file: advanced_topics/environments/index.md
         - file: advanced_topics/environments/managing_environments.md
         - file: advanced_topics/environments/building_custom_images.md
         - file: advanced_topics/environments/binder-for-images.md
+        - file: advanced_topics/environments/pushing_to_ghcr_ecr.md
         - file: advanced_topics/dask.md
         - file: advanced_topics/nbgitpuller.md
     - file: help.md
