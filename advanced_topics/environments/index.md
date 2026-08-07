@@ -24,7 +24,7 @@ The process for building a custom image requires software such as Docker to buil
 
 For more information about build a custom image, go to [`Building Custom Images`](./building_custom_images.md) for detailed instructions for building and pushing images to an image repository.
 
-## [Run An Image from a GitHub Code Repository With Binder](#binder)
+## [Run an Image From a GitHub Code Repository With Binder](#run-an-image-from-a-github-code-repository-with-binder)
 
 GeoLab can run environments from GitHub repository using [Binder](https://mybinder.readthedocs.io/en/latest/). The process is similar to building a custom image but instead of building and storing the image with Docker, you provide the URL of the GitHub repository to GeoLab and the image will be dynamically built and opened.
 
@@ -32,6 +32,6 @@ While this is the simplest method for building and running a custom image, GeoLa
 
 For more information about using Binder, go to [`Binder for Images`](./binder_for_images.md) for detailed instructions for building a repository that works with Binder.
 
-## [Bring A JupyterHub Image:](#bring-your-own-image)
+## [Bring a JupyterHub Image](#bring-a-jupyterhub-image)
 
 Other organizations, such as NASA or NOAA maintain their own JupyterHub compute environment images that run in GeoLab. Using an image from another organization uses the same process as a custom image. Select `Other...` in the Environment pull down menu, enter the image URL, select the `Resource Allocation`, and select `Start`.
