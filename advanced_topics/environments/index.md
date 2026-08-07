@@ -4,7 +4,7 @@ When you open GeoLab and select an environment, you launch a pre-configured virt
 
 ## [Ephemeral Installation:](#ephemeral-installation)
 
-Environments in JupyterHub are temporary. Packages installed while using GeoLab are only valid during current session and will not persist from one session to another. Packages must be reinstalled every time a new GeoLab instance is launched. For ephemeral installs, add packages using {line magics](https://ipython.readthedocs.io/en/8.24.0/interactive/magics.html#line-magics) commands.
+Environments in JupyterHub are temporary. Packages installed while using GeoLab are only valid during current session and will not persist from one session to another. Packages must be reinstalled every time a new GeoLab instance is launched. For ephemeral installs, add packages using [line magics](https://ipython.readthedocs.io/en/8.24.0/interactive/magics.html#line-magics) commands.
 
 Because installations are temporary, we recommend adding these commands to the beginning of a notebook. This ensures that the required packages are installed and available each time when the notebook runs.
 

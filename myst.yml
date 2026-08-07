@@ -23,7 +23,7 @@ project:
         - file: getting_started/user_storage.md
         - file: getting_started/quotas.md
         - file: getting_started/examples_tutorials.md
-    - file: advanced_topics/environments/index.md
+    - file: advanced_topics/index.md
       title: Advanced Topics
       children:
         - file: advanced_topics/environments/index.md
