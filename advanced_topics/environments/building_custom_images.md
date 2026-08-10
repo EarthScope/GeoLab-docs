@@ -1,6 +1,6 @@
 # Building a Custom GeoLab Image
 
-A GeoLab image is a complete, prepackaged computing environment that runs in JupyterLab, it includes common geophysics Python and scientific packages bundled together. Starting a GeoLab session launches an image. This step-by-step guide walks through building an image with a customized environment.
+A GeoLab image is a complete, prepackaged computing environment that runs in JupyterLab. It includes common geophysics Python and scientific packages bundled together. Starting a GeoLab session launches an image. This step-by-step guide walks through building an image with a customized environment.
 
 ---
 
@@ -8,10 +8,10 @@ A GeoLab image is a complete, prepackaged computing environment that runs in Jup
 
 Think of an **image** as a recipe and a **container** as a meal made from that recipe. The recipe doesn't change; you can make the same meal over and over. GeoLab does the same thing: it takes your image and launches a fresh session from it every time.
 
-Install Python packages in an image by editing a plaintext files that list the required software. A tool called `Docker` reads those files and builds the image. The image must be publish in an image repository so GeoLab can access it. Here is the process 
+Install Python packages in an image by editing plaintext files that list the required software. A tool called `Docker` reads those files and builds the image. The image must be published in an image repository so GeoLab can access it. Here is the process:
 
 ```text
-Edit config files  →  Docker builds  →  Image  → Push image to repository →  GeoLab runs it
+Edit config files  →  Docker builds  →  Image  →  Push image to repository  →  GeoLab runs it
 ```
 
 ---
@@ -20,8 +20,8 @@ Edit config files  →  Docker builds  →  Image  → Push image to repository 
 
 Two pieces of software must be installed on **your computer**:
 
-1. **Docker Desktop**, download it at [docker.com](https://www.docker.com/products/docker-desktop/). Install it on your computer, open it and leave it running in the background.
-2. **Git client**,to download the GeoLab Dockerfile template. Use the operating system's package manager to install a git client.
+1. **Docker Desktop.** Download it at [docker.com](https://www.docker.com/products/docker-desktop/). Install it on your computer, open it, and leave it running in the background.
+2. **Git client**, to download the GeoLab Dockerfile template. Use the operating system's package manager to install a git client.
 
 Verify Docker and git are installed and working by opening a terminal and running:
 
@@ -67,7 +67,7 @@ my-geolab-image/
 
 ### `environment.yml`: Your Main Package List
 
-Add conda Python packages from `conda-forge`here. Open the file and add packages under the `dependencies` section:
+Add conda Python packages from `conda-forge` here. Open the file and add packages under the `dependencies` section:
 
 ```yaml
 channels:
@@ -135,7 +135,7 @@ Copy that URL into a browser and a JupyterLab session will open.
 
 **Optional: Test that your packages installed correctly:**
 
-In JupyterLab session, test if a package was installed and functions as expected. A simple version check is often sufficient to determine if a package has been installed and working.
+In the JupyterLab session, test if a package was installed and functions as expected. A simple version check is often sufficient to determine if a package has been installed and is working.
 
 To test a package in a notebook environment, open a notebook and add this code to a cell:
 
@@ -181,14 +181,14 @@ print(f'Python {sys.version}')
 print(f'sys.prefix: {sys.prefix}')
 ```
 
-Open another cell and use either the `py` or `cli` functions to test a packaged. For example:
+Open another cell and use either the `py` or `cli` function to test a package. For example:
 
 ```python
 py('earthscope_sdk', alias='earthscope-sdk')
 cli('es') # earthscope-cli entry point
 ```
 
-Open a new cell and add the following code to summarize the results of the test.
+Open a new cell and add the following code to summarize the results of the test:
 
 ```python
 import pandas as pd
@@ -220,13 +220,13 @@ Each package gets a pass or fail. If something fails, it usually means a package
 
 ## Step 4: Publish Your Image to Docker Hub
 
-Once the local test passes, rebuild the image for GeoLab's platform and push it to a Container Registry.
+Once the local test passes, rebuild the image for GeoLab's platform and push it to a container registry.
 
 **Rebuild for GeoLab's platform:**
 
-GeoLab uses linux/amd64 images. Depending on your computer operating system (Windows or macOS), you may have to rebuild the imaged for the linux/amd64 platform. In addition, the image must be published in an image repository that is accessible to GeoLab.
+GeoLab uses linux/amd64 images. Depending on your computer operating system (Windows or macOS), you may have to rebuild the image for the linux/amd64 platform. In addition, the image must be published in an image repository that is accessible to GeoLab.
 
-If you have created an account using Docker Desktop, pushing an image to Docker Hub, the Docker image repository, does not require additional authentication. `Tag` or name the image with your Docker user name and the name of the image.
+If you created an account using Docker Desktop, pushing an image to Docker Hub (the Docker image repository) does not require additional authentication. `Tag` or name the image with your Docker username and the name of the image.
 
 ```bash
 docker build --no-cache -f Dockerfile \
@@ -242,11 +242,11 @@ docker build --no-cache -f Dockerfile \
 docker push your-docker-username/my-geolab-image:0.1.0
 ```
 
-By default, images published to the Docker Hub are public and available for use with GeoLab.
+By default, images published to Docker Hub are public and available for use with GeoLab.
 
 ### Publishing to GitHub or AWS Image Repositories
 
-Alternatives to Docker Hub include GitHub Container Registry (ghcr) or AWS Elastic Container Registry (ECR). Choosing an imagery depends on user requirements. GitHub features a tight integration with CI (Continuous Integration) through GitHub actions that can trigger an image build and push to ghcr. This automates the process of building and pushing an image through a `pull request`. AWS ECR offers cloud scale uploads and downloads to support multiple instances of GeoLab requests by 100s or more users.
+Alternatives to Docker Hub include GitHub Container Registry (ghcr) or AWS Elastic Container Registry (ECR). Choosing an image repository depends on user requirements. GitHub features a tight integration with CI (Continuous Integration) through GitHub Actions that can trigger an image build and push to ghcr. This automates the process of building and pushing an image through a `pull request`. AWS ECR offers cloud-scale uploads and downloads to support multiple instances of GeoLab requested by hundreds of users or more.
 
 Both ghcr and ECR have more stringent authorization practices and controls over publicly available images. For a step-by-step walkthrough for pushing images to either repository, go to [Pushing Images to GitHub or AWS ECR](./pushing_to_ghcr_ecr.md) for detailed instructions.
 
@@ -291,13 +291,15 @@ docker push ghcr.io/your-github-username/my-geolab-image:0.1.1
 | Add a system tool | `apt.txt` |
 | Build locally for testing | `docker build --tag my-geolab-image:0.1.0 .` |
 | Run locally | `docker run --rm -p 8888:8888 my-geolab-image:0.1.0` |
-| Test packages | `pytest test_packages.py -v` in the container terminal |
+| Test packages | Run the test cells in a notebook (see Step 3) |
 | Build for GeoLab | `docker build --no-cache --platform linux/amd64 --tag ghcr.io/username/image:version .` |
 | Publish | `docker push ghcr.io/username/my-geolab-image:0.1.0` |
 
+---
 
+## Getting a Personal Access Token (for GHCR)
 
-Before you can push images, you need a **Personal Access Token (PAT)** with package permissions:
+Before you can push images to GHCR, you need a **Personal Access Token (PAT)** with package permissions:
 
 1. Go to **GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic)**.
 2. Click **Generate new token (classic)**.

@@ -1,6 +1,6 @@
 # Creating Your Own Python Environment in GeoLab
 
-Python notebooks use packages that are collections of reusable code that perform tasks like process data, make maps, or analyze signals. Notebooks may need packages not available at run time. An **environment** is a way to keep all of packages organized in one tidy, self-contained workspace.
+Python notebooks use packages: collections of reusable code that perform tasks like processing data, making maps, or analyzing signals. A notebook may need packages that aren't available at run time. An **environment** is a way to keep all of those packages organized in one tidy, self-contained workspace.
 
 This guide shows you how to create your own environment in GeoLab.
 
@@ -55,7 +55,7 @@ xarray                    2025.3.0           pyhd8ed1ab_0    conda-forge
 
 ## Installing a Package Without Rebuilding
 
-If you just need to add one or several packages, you can install it directly from inside a notebook cell using the line magic `%` command. This installs into the notebook's active environment:
+If you just need to add one or several packages, you can install them directly from inside a notebook cell using the line magic `%` command. This installs into the notebook's active environment:
 
 ```python
 %conda install -c conda-forge pandas
@@ -73,11 +73,11 @@ Or, for packages only available on PyPI (a different package source):
 
 ## Create Your Own Environment
 
-The best method to create a custom environment is to write a file that lists every package required. Conda reads the file and builds the environment from it. This ensures that it recreates the exact same environment. The file can be shared, making the environment reproducible.
+The best method to create a custom environment is to write a file that lists every package required. Conda reads the file and builds the environment from it. This ensures you can recreate the exact same environment later, and the file can be shared, making the environment reproducible.
 
 ### Step 1: Write an `environment.yml` File
 
-Open an editor and create a new file called `environment.yml` and add the :
+Open an editor, create a new file called `environment.yml`, and add the following:
 
 ```yml
 name: my_environment
@@ -97,9 +97,9 @@ Here's what each part means:
 
 - **name**: What to call the environment.
 - **channels**: Where to download packages from (`conda-forge` is a large, reliable source).
-- **dependencies**: The packages to be installed installed.
-- `ipykernel` is required so the environment can be used as a notebook kernel, always include it.
-- `- pip:` installs packages only available in the PyPI repository
+- **dependencies**: The packages to be installed.
+- `ipykernel` is required so the environment can be used as a notebook kernel, so always include it.
+- `- pip:` installs packages only available in the PyPI repository.
 
 Replace `numpy`, `matplotlib`, or `seisbench` with the required packages.
 
@@ -121,7 +121,7 @@ Conda will figure out which versions of everything are compatible and download t
 conda activate my_environment
 ```
 
-Activating an environment switches the terminal into that workspace, any Python commands use that environment's packages. The terminal prompt will update to show the environment name, confirming it worked.
+Activating an environment switches the terminal into that workspace, so any Python commands you run use that environment's packages. The terminal prompt will update to show the environment name, confirming it worked.
 
 ### Step 4: Register It as a Notebook Kernel
 
@@ -166,11 +166,11 @@ python -m ipykernel install --user --name my_environment --display-name "Python 
 
 ## Installing Non-Python Software
 
-Software that are not purely Python can be installed with either the Ubuntu package manger, `apt-get` or compiled from source.
+Software that is not purely Python can be installed with either the Ubuntu package manager, `apt-get`, or compiled from source.
 
 ### Installing Ubuntu Packages
 
-Some software can be installed via the terminal using `apt-get`. Be advised that users cannot run commands as superusers, i.e., `sudo` will not work and permissions _cannot_ be granted to individual users. If you need to install something foundational, please create a [custom image](./building_custom_images.md).
+Some software can be installed via the terminal using `apt-get`. Be advised that users cannot run commands as superusers; i.e., `sudo` will not work, and permissions _cannot_ be granted to individual users. If you need to install something foundational, please create a [custom image](./building_custom_images.md).
 
 ### C/C++/Fortran Compilers
 
