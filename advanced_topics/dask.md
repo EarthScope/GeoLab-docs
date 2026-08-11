@@ -1,21 +1,7 @@
 # Introduction to Dask
 
-## Table of Contents
-1. [What Is Dask?](#what-is-dask)
-2. [Why Scientists Use Dask](#why-scientists-use-dask)
-3. [Local Dask: Using GeoLab's Resources](#local-dask)
-4. [Dask Distributed: Using Many Computers at Once](#dask-distributed)
-5. [Local vs. Distributed: Which One Should You Use?](#local-vs-distributed)
-6. [Connect to Dask Distributed in GeoLab](#geolab)
-7. [Dask DataFrame](#dask-dataframe)
-8. [Dask Futures](#dask-futures)
-9. [Compute vs. Persist](#compute-vs-persist)
-10. [A Full Working Example](#full-example)
-11. [Summary](#summary)
-
----
-
-## 1. What Is Dask? <a name="what-is-dask"></a>
+(what-is-dask)=
+## 1. What Is Dask?
 
 Dask is a tool for computer programs. Dask takes one large task and divides the task into smaller tasks to complete the with fewer or limited resources. Dask is written in the Python programming language and many scientists use Python for data analysis.
 
@@ -39,7 +25,8 @@ Because two independent nodes have no edge between them, the scheduler can assig
 
 ---
 
-## 2. Why Scientists Use Dask <a name="why-scientists-use-dask"></a>
+(why-scientists-use-dask)=
+## 2. Why Scientists Use Dask
 
 Many research projects use large amounts of data. A seismologist can have years of continuous ground-motion data from hundreds of sensors. A climate scientist can have decades of satellite images. A genomics researcher can have millions of DNA sequences to compare.
 
@@ -59,7 +46,8 @@ Dask uses the same commands as `numpy`, `pandas`, and standard Python functions.
 
 ---
 
-## 3. Local Dask: Using GeoLab's Resources <a name="local-dask"></a>
+(local-dask)=
+## 3. Local Dask: Using GeoLab's Resources
 
 The Dask local scheduler is the simplest way to use Dask in GeoLab. This code creates a local instance of Dask:
 
@@ -87,7 +75,8 @@ A local Dask cluster depends on the hardware available to it. If a dataset needs
 
 ---
 
-## 4. Dask Distributed: Using Many Computers at Once <a name="dask-distributed"></a>
+(dask-distributed)=
+## 4. Dask Distributed: Using Many Computers at Once
 
 **Dask Distributed** uses the same method as local Dask, but on a larger scale. This document uses "Dask Distributed" as the name for a cluster spread across many machines. This name is different from `dask.distributed`, the Python package name. [Section 3](#local-dask) already used the `dask.distributed` package to create a local cluster; the same package creates a cluster whether the cluster is local or spread across many machines.
 
@@ -121,7 +110,8 @@ Because of these costs, a distributed cluster can operate slower than a local in
 
 ---
 
-## 5. Local vs. Distributed: Which One Should You Use? <a name="local-vs-distributed"></a>
+(local-vs-distributed)=
+## 5. Local vs. Distributed: Which One Should You Use?
 
 | | **Local Dask** | **Dask Distributed** |
 |---|---|---|
@@ -135,7 +125,8 @@ Because of these costs, a distributed cluster can operate slower than a local in
 
 ---
 
-## 6. Connect to Dask Distributed in GeoLab <a name="geolab"></a>
+(geolab)=
+## 6. Connect to Dask Distributed in GeoLab
 
 GeoLab is a cloud-based JupyterHub platform, built in partnership with 2i2c. GeoLab gives researchers access to a shared pool of computing resources. A user can request a **Dask Gateway cluster** instead of running Dask only locally in a GeoLab session. A Dask Gateway cluster is a group of additional worker machines that run on shared cloud infrastructure. A user can connect to the cluster from a notebook.
 
@@ -204,7 +195,8 @@ cluster.close()   # Necessary only if you created your own Gateway cluster
 
 ---
 
-## 7. Dask DataFrame <a name="dask-dataframe"></a>
+(dask-dataframe)=
+## 7. Dask DataFrame
 
 [Section 6](#geolab) connects a client to a distributed cluster. This section and the next two sections show how to use that client. Dask DataFrame, Dask Futures, and `.persist()` each send work through the same client to the same cluster.
 
@@ -245,7 +237,8 @@ Dask reads only the file metadata at first. Dask reads each partition only when 
 
 ---
 
-## 8. Dask Futures <a name="dask-futures"></a>
+(dask-futures)=
+## 8. Dask Futures
 
 Dask Delayed builds a complete task graph before any task runs. Dask Futures use a different method: the code sends each task to the scheduler immediately, instead of building the complete graph first.
 
@@ -301,7 +294,8 @@ for finished in as_completed(futures):
 
 ---
 
-## 9. Compute vs. Persist <a name="compute-vs-persist"></a>
+(compute-vs-persist)=
+## 9. Compute vs. Persist
 
 Two methods run a Dask task graph: `.compute()` and `.persist()`. The methods store the result in different places.
 
@@ -331,7 +325,8 @@ mean_result = filtered["amplitude"].mean().compute()
 
 ---
 
-## 10. A Full Working Example <a name="full-example"></a>
+(full-example)=
+## 10. A Full Working Example
 
 This example shows a complete procedure that a user can run in GeoLab. The procedure connects to a distributed cluster, creates a large array of random numbers, calculates statistics on the array, and closes the cluster. The comments in the code explain each step.
 
@@ -431,7 +426,8 @@ print("Cluster closed.")
 
 ---
 
-## 11. Summary <a name="summary"></a>
+(summary)=
+## 11. Summary
 
 Dask converts one large, slow task into many small, fast tasks. The tasks run at the same time.
 
