@@ -2,7 +2,8 @@
 
 When you open GeoLab and select an environment, you launch a pre-configured virtual Python environment that includes commonly used geophysics software. You can install additional software and packages in GeoLab, using one of several options:
 
-## [Ephemeral Installation:](#ephemeral-installation)
+(ephemeral-installation)=
+## Ephemeral Installation:
 
 Environments in JupyterHub are temporary. Packages installed while using GeoLab are only valid during the current session and will not persist from one session to the next. Packages must be reinstalled every time a new GeoLab instance is launched. For ephemeral installs, add packages using [line magic](https://ipython.readthedocs.io/en/8.24.0/interactive/magics.html#line-magics) commands.
 
@@ -16,7 +17,8 @@ Use the `%pip` / `%conda` magic commands because they execute in the active Pyth
 
 For more information about managing environments, go to [`Managing Environments`](./managing_environments.md) for detailed instructions.
 
-## [Build a Custom Image:](#build-a-custom-image)
+(build-a-custom-image)=
+## Build a Custom Image:
 
 If your task or analysis requires the same software over multiple sessions or for multiple users, building a custom image with the required packages is best practice.
 
@@ -24,7 +26,8 @@ Building a custom image requires software such as Docker to build the images. Ge
 
 For more information about building a custom image, go to [`Building Custom Images`](./building_custom_images.md) for detailed instructions on building and pushing images to an image repository.
 
-## [Run an Image From a GitHub Code Repository With Binder](#run-an-image-from-a-github-code-repository-with-binder)
+(run-an-image-from-a-github-code-repository-with-binder)=
+## Run an Image From a GitHub Code Repository With Binder
 
 GeoLab can run environments from a GitHub repository using [Binder](https://mybinder.readthedocs.io/en/latest/). The process is similar to building a custom image, but instead of building and storing the image with Docker, you provide the URL of the GitHub repository to GeoLab and the image will be dynamically built and opened.
 
@@ -32,6 +35,7 @@ While this is the simplest method for building and running a custom image, GeoLa
 
 For more information about using Binder, go to [`Binder for Images`](./binder_for_images.md) for detailed instructions on building a repository that works with Binder.
 
-## [Bring a JupyterHub Image](#bring-a-jupyterhub-image)
+(bring-a-jupyterhub-image)=
+## Bring a JupyterHub Image
 
 Other organizations, such as NASA or NOAA, maintain their own JupyterHub compute environment images that run in GeoLab. Using an image from another organization uses the same process as a custom image. Select `Other...` in the Environment pull-down menu, enter the image URL, select the `Resource Allocation`, and select `Start`.
