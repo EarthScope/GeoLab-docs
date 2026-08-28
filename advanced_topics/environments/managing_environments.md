@@ -1,6 +1,6 @@
 # Creating Your Own Python Environment in GeoLab
 
-Python projects rely on add-on packages, which are collections of code that do useful things like process data, make maps, or analyze signals. Different projects often need different packages, or even different versions of the same package. An **environment** is a way to keep all of that organized in one tidy, self-contained workspace.
+Python notebooks use packages: collections of reusable code that perform tasks like processing data, making maps, or analyzing signals. A notebook may need packages that aren't available at run time. An **environment** is a way to keep all of those packages organized in one tidy, self-contained workspace.
 
 This guide shows you how to create your own environment in GeoLab.
 
@@ -55,16 +55,16 @@ xarray                    2025.3.0           pyhd8ed1ab_0    conda-forge
 
 ## Installing a Package Without Rebuilding
 
-If you just need to add one package quickly, you can install it directly from inside a notebook cell using a special `%` command. This installs into the notebook's active environment:
+If you just need to add one or several packages, you can install them directly from inside a notebook cell using the line magic `%` command. This installs into the notebook's active environment:
 
 ```python
-%conda install pandas
+%conda install -c conda-forge pandas
 ```
 
 Or, for packages only available on PyPI (a different package source):
 
 ```python
-%pip install some-package
+%pip install earthscope-sdk
 ```
 
 > **Warning:** Installing with `%conda` inside a notebook can use a lot of memory. If your notebook becomes unresponsive or the kernel crashes, use the `environment.yml` approach instead, which is more reliable for larger installs.
@@ -73,11 +73,11 @@ Or, for packages only available on PyPI (a different package source):
 
 ## Create Your Own Environment
 
-The best way to create a custom environment is to write a short file that lists everything you need. Conda reads the file and builds the environment from it. This also means you can recreate the exact same environment later, or share it with a teammate.
+The best method to create a custom environment is to write a file that lists every package required. Conda reads the file and builds the environment from it. This ensures you can recreate the exact same environment later, and the file can be shared, making the environment reproducible.
 
 ### Step 1: Write an `environment.yml` File
 
-Create a new file called `environment.yml` and paste in something like this:
+Open an editor, create a new file called `environment.yml`, and add the following:
 
 ```yml
 name: my_environment
@@ -88,16 +88,20 @@ dependencies:
   - ipykernel
   - numpy
   - matplotlib
+  # Pip-specific packages
+  - pip:
+    - seisbench
 ```
 
 Here's what each part means:
 
-- **name**: What you want to call your environment.
+- **name**: What to call the environment.
 - **channels**: Where to download packages from (`conda-forge` is a large, reliable source).
-- **dependencies**: The packages you want installed.
-- `ipykernel` is required so your environment can be used as a notebook kernel, so always include it.
+- **dependencies**: The packages to be installed.
+- `ipykernel` is required so the environment can be used as a notebook kernel, so always include it.
+- `- pip:` installs packages only available in the PyPI repository.
 
-Replace `numpy` and `matplotlib` with whatever packages your project actually needs.
+Replace `numpy`, `matplotlib`, or `seisbench` with the required packages.
 
 ### Step 2: Build the Environment
 
@@ -117,11 +121,11 @@ Conda will figure out which versions of everything are compatible and download t
 conda activate my_environment
 ```
 
-Activating an environment switches your terminal into that workspace, so any Python commands you run use that environment's packages. Your terminal prompt will update to show the environment name, confirming it worked.
+Activating an environment switches the terminal into that workspace, so any Python commands you run use that environment's packages. The terminal prompt will update to show the environment name, confirming it worked.
 
 ### Step 4: Register It as a Notebook Kernel
 
-A new environment isn't automatically available in JupyterLab. Run this command **in the terminal** to register it:
+A new environment isn't automatically available in Jupyter notebooks. To use the newly created environment, it has to be registered. Run this command **in the terminal** to register it:
 
 ```bash
 python -m ipykernel install --user --name my_environment --display-name "Python (my_environment)"
@@ -131,21 +135,21 @@ python -m ipykernel install --user --name my_environment --display-name "Python 
 
 1. Open a notebook and go to **Kernel > Change Kernel…**
 
-   ![Kernel menu showing the Change Kernel option](./images/select_kernel.png)
+   ![Kernel menu showing the Change Kernel option](../../img/select_kernel.png)
 
 2. Select **Python (my_environment)**.
 
-   ![Kernel selector dialog with custom environment listed](./images/select_custom.png)
+   ![Kernel selector dialog with custom environment listed](../../img/select_custom.png)
 
 3. Check the upper-right corner of the notebook to confirm the kernel changed.
 
-   ![Notebook header showing the active custom environment kernel](./images/custom_env.png)
+   ![Notebook header showing the active custom environment kernel](../../img/custom_env.png)
 
-> **Note:** You have to do this for each notebook separately. There's no way to set it as the default for everything.
+> **Note:** This must be done for each notebook separately. There isn't a way to set it as the default for all notebooks.
 
 ---
 
-## Quick Reference
+## Quick Reference for Environments
 
 | What you want to do | Command |
 | --- | --- |
@@ -157,3 +161,17 @@ python -m ipykernel install --user --name my_environment --display-name "Python 
 | Register as a kernel | `python -m ipykernel install --user --name <name> --display-name "<label>"` |
 | Install a package (in notebook) | `%conda install <package>` |
 | Install from PyPI (in notebook) | `%pip install <package>` |
+
+---
+
+## Installing Non-Python Software
+
+Software that is not purely Python can be installed with either the Ubuntu package manager, `apt-get`, or compiled from source.
+
+### Installing Ubuntu Packages
+
+Some software can be installed via the terminal using `apt-get`. Be advised that users cannot run commands as superusers; i.e., `sudo` will not work, and permissions _cannot_ be granted to individual users. If you need to install something foundational, please create a [custom image](./building_custom_images.md).
+
+### C/C++/Fortran Compilers
+
+GeoLab images have `gcc`, `g++`, and `gfortran` installed. You will need to move the application source files to your home directory and compile them within GeoLab.
