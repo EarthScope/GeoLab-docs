@@ -34,7 +34,7 @@ Both approaches use GeoLab's environment selector, but they use different option
 
 **Use GeoLab Binder when** you want to share a GitHub repository as a runnable environment without running Docker locally or managing a container registry.
 
-**Use a custom image when** you need a fixed, versioned environment that won't change between sessions, or when you need more control than config files allow. See [Building a Custom GeoLab Image](./building-custom-images.md).
+**Use a custom image when** you need a fixed, versioned environment that won't change between sessions, or when you need more control than config files allow. See [Building a Custom GeoLab Image](./building_custom_images.md).
 
 ---
 
@@ -112,9 +112,9 @@ git add postBuild
 git commit -m "add postBuild script"
 ```
 
-These files use the exact same format as the custom image template. If you've worked through [Building a Custom GeoLab Image](./building-custom-images.md), you can reuse them directly.
+These files use the exact same format as the custom image template. If you've worked through [Building a Custom GeoLab Image](./building_custom_images.md), you can reuse them directly.
 
-Once your files are ready, commit, and push them to GitHub:
+Once your files are ready, commit and push them to GitHub:
 
 ```bash
 git add environment.yml requirements.txt apt.txt
@@ -179,4 +179,4 @@ git push
 | Launch from a repo | GeoLab → Start Server → Build your own image → paste git clone URL |
 | Share your environment | Share the git clone URL (`https://github.com/username/repo.git`) |
 | Update your environment | Edit config files, commit, and push |
-| Use a fixed versioned environment instead | See [Building a Custom GeoLab Image](./building-custom-images.md) |
+| Use a fixed versioned environment instead | See [Building a Custom GeoLab Image](./building_custom_images.md) |
