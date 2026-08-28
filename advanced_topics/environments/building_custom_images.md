@@ -6,7 +6,7 @@ A GeoLab image is a complete, prepackaged computing environment, including Pytho
 
 ## How It Works
 
-Think of an **image** as a recipe and a **container** as a meal made from that recipe. The recipe doesn't change; you can make the same meal over and over. GeoLab does the same thing: it takes your image and launches a fresh session from it every time.
+Think of an **image** as a recipe with each Python package as an ingredient. An **image** is the meal created from the recipe. Finally, a **container** is the meal served on a plate. The recipe doesn't change and you can make the same meal over and over. GeoLab does the same thing: it takes your image and launches a fresh session from it every time.
 
 You define the image by editing a few plaintext files that list what you want installed. A tool called Docker reads those files and builds the image. You then publish it so GeoLab can access it.
 
@@ -17,6 +17,9 @@ Config files  →  Docker builds  →  Image  →  GeoLab runs it
 ---
 
 ## Before You Start
+
+> **Operating-system note:** The commands below use a macOS/Linux shell. Windows users should run them from a WSL 2 terminal with Docker Desktop’s WSL integration enabled. PowerShell equivalents may differ.
+
 
 You need two things installed on **your computer**:
 
@@ -77,6 +80,8 @@ my-geolab-image/
 
 This is where you add Python packages. Open the file and add packages under the `dependencies` section:
 
+> **ALERT:** Only add packages that are not already listed. Do not replace the existing file.
+
 ```yaml
 channels:
   - conda-forge
@@ -99,8 +104,10 @@ Use conda packages whenever you can, as conda checks that everything works toget
 
 Some packages aren't available through conda and must be installed from PyPI. Add them here, one per line:
 
+> **ALERT:** Keep the EarthScope SDK version already provided by the current template. Add only your additional PyPI package below it.
+
 ```text
-earthscope-sdk==1.4.1
+earthscope-sdk
 my-pypi-package
 ```
 
@@ -143,13 +150,26 @@ Copy that URL into a browser. You'll see a JupyterLab session running from your 
 
 **Test that your packages installed correctly:**
 
-Open a terminal inside JupyterLab (File → New → Terminal) and run:
+**test_notebook.ipynb** checks to see if base packages were installed correctly. It is recommended that you write a test for any packages you install. Add a new cell before **Summary** for you tests.
 
-```bash
-pytest test_packages.py -v
+There are two test functions:
+
+- `py` imports the package and optionally runs a test as a sanity check.
+- `cli` verifies the client package is available and responds to a version flag.
+
+This is an example of a `py` test for gnss-lib-py:
+
+```python
+py('gnss_lib_py')
 ```
 
-Each package gets a pass or fail. If something fails, it usually means a package name is misspelled or a version is unavailable, so go back to `environment.yml` and fix it, then rebuild.
+This is an example of a `cli` test using the earthscope-cli:
+
+```bash
+cli(es, version_flag='--version')
+```
+
+Each package gets a pass or fail which is display in the **Summary** cell of the notebook. If something fails, it usually means a package name is misspelled or a version is unavailable, so go back to `environment.yml` or `requirements.txt` and fix it, then rebuild.
 
 ---
 
@@ -216,6 +236,30 @@ docker push ghcr.io/your-github-username/my-geolab-image:0.1.1
 ```
 
 > **Always use a new version number** (`0.1.1`, `0.1.2`, etc.) when you rebuild. If you reuse the same tag, GeoLab may load the old cached version instead of your new one.
+
+## Troubleshooting Package Installation
+
+In general, it's best practice to install packages using the conda package manager for the GeoLab image. Conda checks packages for dependencies which ensures that dependency conflicts are resolved in the environment. Conda has a search function to discover packages.
+
+Some packages are only available in PyPI and are installed with the pip package manager. Pip also has a search function to find packages in PyPI.
+
+> **Tip:** Keep mind that installation name and import name can be different (such as, scikit-learn vs sklearn).
+
+### Find If a Conda Package Is Available
+
+To find if a package is available through the conda package manager, you can use `conda search`:
+
+```bash
+conda search -c conda-forge #PackageName(e.g., seisbench)
+```
+
+### Find If a Package Is Available On PyPI
+
+To find if a package is available through the pip package manager, you can use `the following command.
+
+```bash
+python -m pip index versions #PackageName(e.g., seisbench)
+```
 
 ---
 
