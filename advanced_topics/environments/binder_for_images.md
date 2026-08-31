@@ -1,6 +1,6 @@
 # GeoLab Binder
 
-There are two ways to launch a custom environment in GeoLab. The first is to build a Docker image, push it to a registry, and paste the image URL. The second, called **GeoLab Binder**, is to point GeoLab at a GitHub repository and let it build the environment for you. This guide covers how the second approach works and when to use it.
+There are two ways to launch a custom environment in GeoLab. The first is to [Build a custom image](custom_image_page.md) and push it to a registry, and specify the image URL when launching GeoLab. The second, called **GeoLab Binder**, is to point GeoLab at a GitHub repository and let it build the environment for you. This guide covers how the second approach works and when to use it.
 
 ---
 
@@ -12,9 +12,9 @@ Behind the scenes, GeoLab reads the Dockerfile and configuration files in your r
 
 Both approaches run inside GeoLab, so you have the same access to EarthScope data services either way.
 
-```text
-GitHub repo with config files  →  GeoLab builds image  →  Session launches in GeoLab
-```
+1. GitHub repo with config files
+2. GeoLab builds image
+3. Session launches in GeoLab
 
 ---
 

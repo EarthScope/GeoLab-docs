@@ -2,7 +2,7 @@
 
 Python notebooks use packages: collections of reusable code that perform tasks like processing data, making maps, or analyzing signals. A notebook may need packages that aren't available at run time. An **environment** is a way to keep all of those packages organized in one tidy, self-contained workspace.
 
-This guide shows you how to create your own environment in GeoLab.
+When you launch GeoLab, you are in environment with commonly used geophysical packages. This guide shows you how to create your own environment in GeoLab.
 
 ---
 
@@ -53,7 +53,7 @@ xarray                    2025.3.0           pyhd8ed1ab_0    conda-forge
 
 ---
 
-## Installing a Package Without Rebuilding
+## Installing a Package Without Creating a New Environment
 
 If you just need to add one or several packages, you can install them directly from inside a notebook cell using the line magic `%` command. This installs into the notebook's active environment:
 
@@ -67,13 +67,15 @@ Or, for packages only available on PyPI (a different package source):
 %pip install earthscope-sdk
 ```
 
-> **Warning:** Installing with `%conda` inside a notebook can use a lot of memory. If your notebook becomes unresponsive or the kernel crashes, use the `environment.yml` approach instead, which is more reliable for larger installs.
+> **Warning:** Installing with `%conda` inside a notebook can use a lot of memory because it checks for dependency conflicts among packages and selects the correct packages fix conflicts. If your notebook becomes unresponsive or the kernel crashes, use the `environment.yml` approach instead, which is more reliable for larger installs. Installing packages with pip uses less memory but does not fix dependency conflicts. Try installing with conda first, use pip if the package is not available in the conda-forge repository.
 
 ---
 
 ## Create Your Own Environment
 
 The best method to create a custom environment is to write a file that lists every package required. Conda reads the file and builds the environment from it. This ensures you can recreate the exact same environment later, and the file can be shared, making the environment reproducible.
+
+> **IMPORTANT**: This section describes building a new environment that does not include the packages in the default GeoLab environment.
 
 ### Step 1: Write an `environment.yml` File
 
@@ -99,7 +101,7 @@ Here's what each part means:
 - **channels**: Where to download packages from (`conda-forge` is a large, reliable source).
 - **dependencies**: The packages to be installed.
 - `ipykernel` is required so the environment can be used as a notebook kernel, so always include it.
-- `- pip:` installs packages only available in the PyPI repository.
+- `- pip:` installs packages only available in the PyPI repository, such as seisbench. The majority of pip packages will install without a dependency conflict. If a conflict exists when running your code, Python will provide an error message and suggest the versions of packages that do not conflict. You will have manually resolve the conflict by installing the suggested packages.
 
 Replace `numpy`, `matplotlib`, or `seisbench` with the required packages.
 
@@ -109,6 +111,12 @@ In the **terminal**, run:
 
 ```bash
 conda env create -f environment.yml
+```
+
+Alternatively, if you want to permanently add packages to the default GeoLab environment, you can export `environment.yaml` and edit the file with packages you want to install.
+
+```bash
+conda env export > environment.yml
 ```
 
 Conda will figure out which versions of everything are compatible and download them. This can take a few minutes, which is normal.
