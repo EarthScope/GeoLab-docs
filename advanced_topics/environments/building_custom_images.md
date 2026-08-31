@@ -55,7 +55,7 @@ my-geolab-image/
 ├── requirements.txt    ← add PyPI-only packages here
 ├── apt.txt             ← add system software here (rarely needed)
 ├── start               ← do not edit this
-├── test_packages.py    ← smoke test for installed packages
+├── test_helpers.py     ← Python module with testing functions for packages
 └── test_notebook.ipynb ← interactive version of the smoke test
 ```
 
