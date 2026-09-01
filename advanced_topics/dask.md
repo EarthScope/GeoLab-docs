@@ -3,7 +3,7 @@
 (what-is-dask)=
 ## 1. What Is Dask?
 
-Dask is a tool for computer programs. Dask takes one large task and divides the task into smaller tasks to complete the with fewer or limited resources. Dask is written in the Python programming language and many scientists use Python for data analysis.
+Dask is a python tool that helps with the orchestratration large tasks. Dask takes one large task and divides the task into smaller tasks that can execute in parallel to complete the task with fewer or limited resources.
 
 Dask gives users two types of tools:
 
