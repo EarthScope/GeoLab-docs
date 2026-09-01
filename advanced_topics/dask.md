@@ -59,7 +59,7 @@ client = Client()
 
 The `dask.distributed` package provides Dask's client, scheduler, and worker system. This package creates a cluster whether the cluster is local, as in this section, or spread across many machines, as [Section 4](#dask-distributed) describes. The package name stays the same in both cases.
 
-Dask starts workers on the cores available in GeoLab. For example, if GeoLab gives a user 8 cores, Dask can create workers to use these cores. The workers complete tasks at the same time.
+Dask starts workers on the cores available in GeoLab. For example, if GeoLab gives a user 4 CPU cores, Dask can create workers to use all these cores at once. Each worker completes tasks at the same time.
 
 ### When to Use Local Dask
 
