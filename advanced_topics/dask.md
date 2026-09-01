@@ -80,7 +80,7 @@ A local Dask cluster depends on the hardware available to it. If a dataset needs
 
 **Dask Distributed** uses the same method as local Dask, but on a larger scale. This document uses "Dask Distributed" as the name for a cluster spread across many machines. This name is different from `dask.distributed`, the Python package name. [Section 3](#local-dask) already used the `dask.distributed` package to create a local cluster; the same package creates a cluster whether the cluster is local or spread across many machines.
 
-Workers do not stay on one machine. Workers can operate on many separate machines, frequently in the cloud. A network connects the machines.
+When using Dask Distributed, workers do not stay on one machine. Workers can operate on many separate machines across a cloud network. The local machine (in this case, your GeoLab instance) operates as the control center and pushes individual, independent tasks out to the other machines across the network. 
 
 Dask Distributed has three parts:
 
