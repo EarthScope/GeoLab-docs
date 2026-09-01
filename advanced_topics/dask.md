@@ -1,32 +1,7 @@
 # Introduction to Dask
 
-(what-is-dask)=
-## 1. What Is Dask?
-
-Dask is a python tool that helps with the orchestratration large tasks. Dask takes one large task and divides the task into smaller tasks that can execute in parallel to complete the task with fewer or limited resources.
-
-Dask gives users two types of tools:
-
-- **Dask Array** divides a large array into smaller pieces and works like `numpy`. **Dask DataFrame** divides a large table into smaller pieces and works like `pandas`. NumPy is a tool for large groups of numbers. Pandas is a tool for tables of data. Dask Array and Dask DataFrame can process data too large for GeoLab's memory.
-- **Dask Delayed** builds a plan for a custom Python function before running it. **Dask Futures** runs a custom Python function immediately and returns a handle to the result. Both let users run their own Python functions at the same time.
-
-### The Task Graph
-
-Dask represents a large task as a **task graph** instead of running the task immediately. A task graph has two parts:
-
-- **Nodes.** A node represents one small task, for example one calculation on one piece of data.
-- **Edges.** An edge represents a dependency between two tasks. An edge connects a task to the earlier task that the task needs.
-
-Dask builds the task graph first and runs the task graph later. This method is called **lazy evaluation**. For example, when a user creates a large Dask Array or Dask DataFrame, Dask does not process any data yet. Dask records one node for each piece of the array or table. When the code calls a method, for example `.mean()`, Dask adds more nodes to the graph: one node for each partial result, and one final node that combines the partial results. [Section 10](#full-example) shows this pattern with a concrete example: one node for every 5,000 x 5,000 chunk of a 100,000 x 100,000 array, plus the nodes that combine the chunks into the final mean and standard deviation.
-
-Dask does not run any node in the graph until the code calls `.compute()` or `.persist()`. At that point, Dask sends the complete task graph to a **scheduler**. The scheduler finds every node with no unfinished dependency and assigns that node to an available **worker** ([Section 4](#dask-distributed) describes workers). A worker runs its assigned node and returns the result to the scheduler. When a node's dependencies are all finished, the scheduler marks that node as ready and assigns the node to a worker. This process repeats until every node in the graph is complete.
-
-Because two independent nodes have no edge between them, the scheduler can assign the two nodes to two different workers at the same time. This is why Dask can process many pieces of one large task in parallel.
-
----
-
 (why-scientists-use-dask)=
-## 2. Why Scientists Use Dask
+## 1. Why Scientists Use Dask
 
 Many research projects use large amounts of data. A seismologist can have years of continuous ground-motion data from hundreds of sensors. A climate scientist can have decades of satellite images. A genomics researcher can have millions of DNA sequences to compare.
 
@@ -42,7 +17,36 @@ Dask helps solve these three problems:
 - Dask can use **every core available on a GeoLab instance** at the same time, instead of one core at a time.
 - Dask can spread work **across many separate computers** connected on a network in the cloud. The computers operate together like one large computer.
 
+---
+
+(what-is-dask)=
+## 2. What Is Dask?
+
+Dask is a python tool that helps with the orchestratration large tasks. Dask takes one large task and divides the task into smaller tasks that can execute in parallel to complete the task with fewer or limited resources.
+
 Dask uses the same commands as `numpy`, `pandas`, and standard Python functions. Users do not have to learn a new programming method to get these benefits. Users write standard Python code. Dask divides the work and runs the work efficiently.
+
+Dask gives users two types of tools:
+
+- **Dask Array** divides a large array into smaller pieces and works like `numpy`. **Dask DataFrame** divides a large table into smaller pieces and works like `pandas`. NumPy is a tool for large groups of numbers. Pandas is a tool for tables of data. Dask Array and Dask DataFrame can process data too large for GeoLab's memory.
+- **Dask Delayed** builds a plan for a custom Python function before running it. **Dask Futures** runs a custom Python function immediately and returns a handle to the result. Both let users run their own Python functions at the same time.
+
+### The Task Graph
+
+Dask represents a large task as a **task graph** instead of running the task immediately. A task graph has two parts:
+
+- **Nodes.** A node represents one small task, for example one calculation on one piece of data.
+- **Edges.** An edge represents a dependency between two tasks. An edge connects a task to the earlier task that the task needs.
+
+Dask builds the task graph first and runs the task graph later. This method is called **lazy evaluation**. For example, when a user creates a large Dask Array or Dask DataFrame, Dask does not process any data yet. Dask records one node for each piece of the array or table. When the code calls a method, for example `.mean()`, Dask adds more nodes to the graph: one node for each partial result, and one final node that combines the partial results. [Section 10](#full-example) shows this pattern with a concrete example: one node for every 5,000 x 5,000 chunk of a 100,000 x 100,000 array, plus the nodes that combine the chunks into the final mean and standard deviation.
+
+The image below shows the task graph for `mean_value` on a small array split into 4 chunks, drawn with `mean_value.visualize()`. Each `random_sample` node creates one chunk, each `mean_chunk` node calculates the mean of one chunk, and the single `mean_agg-aggregate` node at the top combines the partial means into the final result.
+
+![Task graph for mean_value, showing random_sample, mean_chunk, and mean_agg-aggregate nodes](../img/dask_task_graph.png)
+
+Dask does not run any node in the graph until the code calls `.compute()` or `.persist()`. At that point, Dask sends the complete task graph to a **scheduler**. The scheduler finds every node with no unfinished dependency and assigns that node to an available **worker** ([Section 4](#dask-distributed) describes workers). A worker runs its assigned node and returns the result to the scheduler. When a node's dependencies are all finished, the scheduler marks that node as ready and assigns the node to a worker. This process repeats until every node in the graph is complete.
+
+Because two independent nodes have no edge between them, the scheduler can assign the two nodes to two different workers at the same time. This is why Dask can process many pieces of one large task in parallel.
 
 ---
 
@@ -53,8 +57,21 @@ The Dask local scheduler is the simplest way to use Dask in GeoLab. This code cr
 
 ```python
 from dask.distributed import Client
+import dask
 
 client = Client()
+
+# A simple Python function.
+def square_it(n):
+    return n * n
+
+# dask.delayed() wraps the function call in a task instead of running it right away.
+# Dask does not run square_it() yet -- this line only builds a plan.
+delayed_result = dask.delayed(square_it)(10)
+
+# .compute() sends the task to the local workers and returns the result.
+result = delayed_result.compute()
+print(result)   # 100
 ```
 
 The `dask.distributed` package provides Dask's client, scheduler, and worker system. This package creates a cluster whether the cluster is local, as in this section, or spread across many machines, as [Section 4](#dask-distributed) describes. The package name stays the same in both cases.
@@ -80,13 +97,13 @@ A local Dask cluster depends on the hardware available to it. If a dataset needs
 
 **Dask Distributed** uses the same method as local Dask, but on a larger scale. This document uses "Dask Distributed" as the name for a cluster spread across many machines. This name is different from `dask.distributed`, the Python package name. [Section 3](#local-dask) already used the `dask.distributed` package to create a local cluster; the same package creates a cluster whether the cluster is local or spread across many machines.
 
-When using Dask Distributed, workers do not stay on one machine. Workers can operate on many separate machines across a cloud network. The local machine (in this case, your GeoLab instance) operates as the control center and pushes individual, independent tasks out to the other machines across the network. 
-
 Dask Distributed has three parts:
 
 - **Scheduler**: The scheduler decides which worker completes each task in the task graph. The scheduler also tracks which tasks are complete.
 - **Workers**: Workers run the calculations. Each worker can be a virtual machine, a container, or a server.
 - **Client**: The client is the Python code that the user writes in a notebook. The client sends requests to the scheduler and receives the results.
+
+When using Dask Distributed, workers do not stay on one machine. Workers can operate on many separate machines across a cloud network. The local machine (in this case, your GeoLab instance) operates as the control center and pushes individual, independent tasks out to the other machines across the network. 
 
 Workers can operate on many physical machines in a data center. As a result, a distributed Dask cluster can have more memory and more processing power than one computer. A distributed cluster can have hundreds or thousands of cores and terabytes of memory.
 
@@ -95,7 +112,7 @@ Workers can operate on many physical machines in a data center. As a result, a d
 Use distributed Dask for these tasks:
 
 - **Process very large datasets** that overwhelm a single computer.
-- **Share computing power** among many users in a classroom or a laboratory. GeoLab uses this method (refer to [Section 6](#geolab)).
+- **Support multiple users at the same time.** Distributed Dask lets many users in a classroom or a laboratory share the same pool of computing power at once. GeoLab uses this method (refer to [Section 6](#geolab)).
 - **Complete time-sensitive research.** A job that runs on 50 workers instead of 1 computer can change a multi-day task into a multi-hour task.
 
 ### Limits of Distributed Dask
@@ -121,14 +138,14 @@ Because of these costs, a distributed cluster can operate slower than a local in
 | Cost | No cost (part of GeoLab) | Frequently costs money or uses shared resources |
 | Best use | Learning, small-to-medium data, quick analysis | Large datasets, shared classroom or lab computing, time-critical jobs |
 
-**Rule:** start with local Dask. Test the code on a small part of the data. Confirm that the logic is correct. Confirm that the task is too large or too slow for GeoLab's local resources. Then switch to a distributed cluster to scale up the task. This method prevents users from spending cloud computing time to debug a simple error.
+**Rule:** start with local Dask. Test the code on a small part of the data. Confirm that the logic is correct. Confirm that the task is too large or too slow for GeoLab's local resources before switching to a distributed cluster to scale up the task. This method prevents users from spending cloud computing time to debug a simple error.
 
 ---
 
 (geolab)=
 ## 6. Connect to Dask Distributed in GeoLab
 
-GeoLab is a cloud-based JupyterHub platform, built in partnership with 2i2c. GeoLab gives researchers access to a shared pool of computing resources. A user can request a **Dask Gateway cluster** instead of running Dask only locally in a GeoLab session. A Dask Gateway cluster is a group of additional worker machines that run on shared cloud infrastructure. A user can connect to the cluster from a notebook.
+GeoLab is a cloud-based JupyterHub platform, built in partnership with 2i2c. GeoLab gives researchers access to a shared pool of computing resources. A user can request a **Dask Gateway cluster** instead of running Dask only locally in a GeoLab session. A Dask Gateway cluster is a group of additional worker machines that run on shared AWS cloud infrastructure. A user can connect to the cluster from a notebook.
 
 The `dask_gateway` package manages requests for a distributed Dask cluster.
 
@@ -185,6 +202,8 @@ client.wait_for_workers(n_workers=2)
 ```
 
 **Step 6: Run the analysis.** After the client connects, Dask automatically sends the work to the distributed cluster instead of the local instance. This applies to any code that uses Dask Array, Dask DataFrame, `delayed`, or `client.map`.
+
+See sections 7-10 for concrete examples on setting up your analysis to run. More details and examples are available in our [tutorial notebooks](github or nb gitpuller link)
 
 **Step 7: Close the cluster.** When the task is complete, close the cluster. This action releases the shared computing resources for other users.
 
@@ -292,6 +311,10 @@ for finished in as_completed(futures):
 | Requires | `.compute()` to run the graph | An active client |
 | Best use | A workflow the user can define completely in advance | A workflow that changes while it runs, or that needs results as they finish |
 
+**Example:** A seismologist has 500 known station files and needs the same processing step, for example a bandpass filter, applied to every file. The full list of files and the full set of tasks are known before the code runs, so **Dask Delayed** fits this workflow: the code builds one task graph for all 500 files and calls `.compute()` once.
+
+A different seismologist searches an earthquake catalog for events above a magnitude threshold during a large earthquake sequence. New events can appear while the search runs, and the seismologist wants to start downloading and processing each event's waveform data as soon as the catalog returns it, instead of waiting for the full catalog search to finish. **Dask Futures** fits this workflow: the code submits a task for each event as the event appears, and `as_completed()` processes each waveform as soon as its download finishes.
+
 ---
 
 (compute-vs-persist)=
@@ -322,6 +345,10 @@ mean_result = filtered["amplitude"].mean().compute()
 |---|---|---|---|
 | `.compute()` | The notebook | A Python, NumPy, or pandas object | A small, final result |
 | `.persist()` | Worker memory | A Dask object | An intermediate result the workflow reuses |
+
+**Example:** A seismologist filters a large continuous ground-motion dataset down to only the high-amplitude events. The seismologist then plans to calculate several statistics from that same subset, for example the mean amplitude, the maximum amplitude, and the number of events. Because the workflow reuses the filtered subset more than once, **`.persist()`** fits this workflow. The code above already shows this pattern: `filtered` is persisted once, and the later mean calculation reuses the persisted result instead of re-filtering the full dataset from scratch.
+
+A different seismologist runs one calculation, the mean amplitude across an entire station's data, to decide whether the station needs further investigation. The workflow needs only that one small number, and nothing later in the notebook reuses the intermediate result. **`.compute()`** fits this workflow better: it returns the final mean directly to the notebook as a standard Python value, without keeping a Dask object in worker memory.
 
 ---
 
@@ -437,3 +464,14 @@ Dask converts one large, slow task into many small, fast tasks. The tasks run at
 - **Dask DataFrame**, **Dask Futures**, and `.persist()` extend these same ideas to tabular data, dynamic workflows, and reusable intermediate results.
 
 The code that a user writes changes very little between local and distributed use. The user changes only the connection method. Dask manages the rest of the task.
+
+---
+
+(further-resources)=
+## 12. Further Resources
+
+These tutorials provide examples demonstrating how to use dask for seismic analysis.
+
+- [When and how to use dask delayed and futures.](https://github.com/EarthScope/geolab-tutorials/blob/main/advanced_compute/dask/01_dask_operation.ipynb)
+- [A seismic workflow example.](https://github.com/EarthScope/geolab-tutorials/blob/main/advanced_compute/dask/02_dask_application.ipynb)
+- [Using dask to prepare data for seismic picking with seisbench.](https://github.com/EarthScope/geolab-tutorials/blob/main/advanced_compute/dask/02_dask_application.ipynb)
