@@ -32,7 +32,7 @@ Many research projects use large amounts of data. A seismologist can have years 
 
 Three problems occur frequently:
 
-1. **The data does not fit in memory.** GeoLab can give a user up to 29 gigabytes of RAM. A dataset can be 500 gigabytes. The user cannot load all the data at the same time.
+1. **The data does not fit in memory.** When working on analyses ranging from dozens of gigabytes to petabyte-scale, a user cannot load all the data at the same time.
 2. **The analysis takes too much time.** Even when the data fits in memory, a calculation on all the data, one step at a time, can take hours or days.
 3. **The GeoLab instance does not have enough resources.** Some tasks are too large for a single powerful environment to complete in a reasonable time.
 
