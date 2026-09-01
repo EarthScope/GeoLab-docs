@@ -185,7 +185,7 @@ client.wait_for_workers(n_workers=2)
 ```
 
 **Step 6: Run the analysis.** After the client connects, Dask automatically sends the work to the distributed cluster instead of the local instance. This applies to any code that uses Dask Array, Dask DataFrame, `delayed`, or `client.map`.
-
+See sections 7-10 for concrete examples on setting up your analysis to run. More details and examples are available in our [tutorial notebooks](github or nb gitpuller link)
 **Step 7: Close the cluster.** When the task is complete, close the cluster. This action releases the shared computing resources for other users.
 
 ```python
