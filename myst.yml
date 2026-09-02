@@ -27,6 +27,7 @@ project:
       children:
         - file: advanced_topics/dask.md
         - file: advanced_topics/nbgitpuller.md
+        - file: advanced_topics/connecting_to_external_resources.md
         - file: advanced_topics/environments/index.md
           title: Managing Environments
           children:
