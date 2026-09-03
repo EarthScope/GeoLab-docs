@@ -2,12 +2,14 @@
 
 Step-by-step guides to authenticating and pushing Docker images to the Amazon ECR Public Gallery and GitHub Container Registry (GHCR). Each section covers login, tagging/pushing, and troubleshooting authorization errors that are frequently encountered.
 
+(github-container-registry-ghcr)=
 ## GitHub Container Registry (GHCR)
 
 A guide to authenticating to GitHub Container Registry with a personal access token (PAT) or the GitHub CLI, pushing images, and troubleshooting common authorization errors.
 
 > **Note:** GHCR images are namespaced under a GitHub user or organization, e.g. `ghcr.io/<owner>/myrepo`. Package visibility (public/private) and access are managed per-package in GitHub, separately from the repository the code lives in.
 
+(ghcr-prerequisites)=
 ### Prerequisites
 
 The following software needs to be installed.
@@ -18,6 +20,7 @@ The following software needs to be installed.
   - A **personal access token (classic)** with the `write:packages` scope (and `read:packages`, `delete:packages` if needed), or
   - **Optional:** The **GitHub CLI** (`gh`) installed and authenticated
 
+(create-a-personal-access-token-one-time)=
 ### Create a Personal Access Token (One-time)
 
 In GitHub select: **Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token**.
@@ -32,6 +35,7 @@ Save the token in a safe location, because GitHub only shows it once.
 
 > Alternatively, skip token management entirely and use `gh auth login`, then `gh auth token` to retrieve a token for the login step below.
 
+(log-in-to-ghcr)=
 ### Log in to GHCR
 
 Using a Personal Access Token (PAT):
@@ -52,6 +56,7 @@ A successful login prints `Login Succeeded`.
 
 > **Note:** Classic PATs don't expire unless an expiration date is set when creating them. If an expiration date is set, a new token needs to be generated when it expires.
 
+(tag-and-push-an-image)=
 ### Tag and Push an Image
 
 Rename or `tag` the image with the GitHub Container Registry address, GitHub username, the image name, and tag.
@@ -70,6 +75,7 @@ docker push ghcr.io/<github_username>/my_geolab:latest
 
 Replace `<github_username>` with your GitHub username or organization name. The first push to a new name automatically creates the package; you can adjust its visibility (public/private) and linked repository afterward in **Package settings**.
 
+(set-the-repository-to-public)=
 ### Set the Repository to Public
 
 Images pushed to GHCR are private by default. The image must be set to public for GeoLab to access it. These steps change a GitHub Container Registry (GHCR) package's visibility so the image can be pulled without authentication.
@@ -94,10 +100,12 @@ Images pushed to GHCR are private by default. The image must be set to public fo
 
 The image is now publicly accessible without authentication.
 
+(troubleshooting-ghcr)=
 ### Troubleshooting GHCR
 
 A 401 Unauthorized or 403 Forbidden are the two most common errors when pushing an image to GHCR.
 
+(ghcr-401-unauthorized)=
 #### 401 Unauthorized
 
 You are **not authenticated**: the token is stale, expired, lacks scope, or was never provided to Docker.
@@ -114,6 +122,7 @@ You are **not authenticated**: the token is stale, expired, lacks scope, or was 
 
 > A mid-session 401 usually means the PAT expired or was revoked. Generate a new one and log in again.
 
+(ghcr-403-forbidden)=
 #### 403 Forbidden
 
 You **are authenticated**, but you lack permission, or the package's access settings are blocking you.
@@ -123,6 +132,7 @@ You **are authenticated**, but you lack permission, or the package's access sett
 3. **Confirm the namespace is correct.** Pushing to `ghcr.io/<OWNER>/...` where `<OWNER>` is an organization requires that the organization has enabled package creation for your role, and that you're a member with sufficient permissions.
 4. **If using GitHub Actions**, make sure the workflow has `permissions: packages: write` set, since the default `GITHUB_TOKEN` scope is otherwise read-only.
 
+(ghcr-clearing-credentials-and-starting-fresh)=
 #### Clearing credentials and starting fresh
 
 If refreshing the token doesn't fix a 401/403, clear cached Docker credentials and log in again from scratch.
@@ -154,6 +164,7 @@ After clearing both, re-run the full login sequence from the **Log in to GHCR** 
 echo $CR_PAT | docker login ghcr.io -u <GITHUB_USERNAME> --password-stdin
 ```
 
+(ghcr-quick-reference)=
 #### GHCR Quick reference
 
 | Error | Meaning | First thing to try |
@@ -161,6 +172,7 @@ echo $CR_PAT | docker login ghcr.io -u <GITHUB_USERNAME> --password-stdin
 | `401 Unauthorized` | Not authenticated / token expired or wrong scope | Regenerate token, re-run `docker login` |
 | `403 Forbidden` | Authenticated but not permitted | Check token scope and package access settings |
 
+(ghcr-token-lifetimes-at-a-glance)=
 #### Token lifetimes at a glance
 
 - **Classic PAT:** No expiration by default, unless one was set at creation
@@ -170,12 +182,14 @@ When a token expires or is revoked, re-authenticate from the relevant step above
 
 ---
 
+(amazon-web-services-public-elastic-container-registry-ecr)=
 ## Amazon Web Services Public Elastic Container Registry (ECR)
 
 A step-by-step guide to authenticating and granting Amazon ECR credentials to Docker for pushing images to ECR, plus troubleshooting the two common authorization errors.
 
 > **ECR Public vs. private ECR:** Public repositories live at `public.ecr.aws/<REGISTRY_ALIAS>` and use the `aws ecr-public` command set. Authentication **must** be done in `us-east-1`, regardless of where you or your users are located.
 
+(ecr-prerequisites)=
 ### Prerequisites
 
 - AWS CLI v2 installed (`aws --version`).
@@ -183,6 +197,7 @@ A step-by-step guide to authenticating and granting Amazon ECR credentials to Do
 - Docker installed and running.
 - A public registry alias (find it in the ECR console under **Public registries**, e.g. `a1b2c3d4`).
 
+(create-an-aws-ecr-public-repository)=
 ### Create an AWS ECR Public Repository
 
 Create an ECR public repository to store your images. If you don't have a repository, AWS will create one, but it's better to choose your own repository name. Choose a name to replace `<my-public-repo>`.
@@ -193,6 +208,7 @@ aws ecr-public create-repository \
     --region us-east-1
 ```
 
+(getting-public-ecr-credentials)=
 ### Getting Public ECR Credentials
 
 Authenticate Docker to a public ECR registry. Use the `ecr-public` command, and note that the region **must** be `us-east-1`:
@@ -207,6 +223,7 @@ Replace `<user-profile>` with your profile. The login host for the public galler
 
 > **Note:** The token returned by `get-login-password` is valid for **12 hours**. After it expires, re-run this step. The public login endpoint only responds in `us-east-1`.
 
+(tag-and-push-the-image)=
 ### Tag and Push the Image
 
 To push an image to public ECR, tag the image, replacing `<registry_alias>` with the repository name. This tells ECR where the image is stored.
@@ -224,10 +241,12 @@ The next step is to push the image to public ECR.
 docker push public.ecr.aws/<registry_alias>/my_geolab:latest
 ```
 
+(troubleshooting-ecr)=
 ### Troubleshooting ECR
 
 A 401 Unauthorized or 403 Forbidden are the two most common errors when pushing an image to ECR.
 
+(ecr-401-unauthorized)=
 #### 401 Unauthorized
 
 You are **not authenticated**: the Docker auth token is stale, expired, or was never issued.
@@ -250,6 +269,7 @@ You are **not authenticated**: the Docker auth token is stale, expired, or was n
 
 > A mid-session 401 almost always just means the 12-hour Docker token has expired. Re-login and retry.
 
+(ecr-403-forbidden)=
 #### 403 Forbidden
 
 You **are authenticated**, but you lack permission, or a policy is blocking the action.
@@ -276,6 +296,7 @@ You **are authenticated**, but you lack permission, or a policy is blocking the 
 
 4. **Make sure you assumed the right account and role.** Using a profile that lacks push rights is the most common cause.
 
+(ecr-clearing-credentials-and-starting-fresh)=
 #### Clearing credentials and starting fresh
 
 If refreshing your session doesn't fix a 401/403, stale cached credentials are a common culprit. Clear both AWS and Docker credentials, then log in again from scratch.
@@ -309,6 +330,7 @@ aws ecr-public get-login-password --region us-east-1 --profile <user-profile> \
   | docker login --username AWS --password-stdin public.ecr.aws
 ```
 
+(pushing-quick-reference)=
 ## Quick reference
 
 | Error | Meaning | First thing to try |
@@ -316,6 +338,7 @@ aws ecr-public get-login-password --region us-east-1 --profile <user-profile> \
 | `401 Unauthorized` | Not authenticated / token expired | `aws sso login` then re-run `docker login` |
 | `403 Forbidden` | Authenticated but not permitted | Check IAM permissions and that the repo exists |
 
+(pushing-token-lifetimes-at-a-glance)=
 ## Token lifetimes at a glance
 
 - **SSO session:** ~8 to 12 hours (configurable by your admin)

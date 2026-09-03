@@ -6,6 +6,7 @@ When you launch GeoLab, you are in environment with commonly used geophysical pa
 
 ---
 
+(what-is-a-package-manager)=
 ## What Is a Package Manager?
 
 GeoLab uses a tool called **conda** to install and manage packages. Think of conda like an app store for Python packages: you tell it what you want, it figures out what else is needed to make it work, and installs everything together.
@@ -14,6 +15,7 @@ GeoLab uses a tool called **conda** to install and manage packages. Think of con
 
 ---
 
+(see-whats-already-installed)=
 ## See What's Already Installed
 
 Open the **terminal** in GeoLab and try these commands to get your bearings.
@@ -53,6 +55,7 @@ xarray                    2025.3.0           pyhd8ed1ab_0    conda-forge
 
 ---
 
+(installing-a-package-without-creating-a-new-environment)=
 ## Installing a Package Without Creating a New Environment
 
 If you just need to add one or several packages, you can install them directly from inside a notebook cell using the line magic `%` command. This installs into the notebook's active environment:
@@ -71,12 +74,14 @@ Or, for packages only available on PyPI (a different package source):
 
 ---
 
+(create-your-own-environment)=
 ## Create Your Own Environment
 
 The best method to create a custom environment is to write a file that lists every package required. Conda reads the file and builds the environment from it. This ensures you can recreate the exact same environment later, and the file can be shared, making the environment reproducible.
 
 > **IMPORTANT**: This section describes building a new environment that does not include the packages in the default GeoLab environment.
 
+(step-1-write-an-environmentyml-file)=
 ### Step 1: Write an `environment.yml` File
 
 Open an editor, create a new file called `environment.yml`, and add the following:
@@ -105,6 +110,7 @@ Here's what each part means:
 
 Replace `numpy`, `matplotlib`, or `seisbench` with the required packages.
 
+(step-2-build-the-environment)=
 ### Step 2: Build the Environment
 
 In the **terminal**, run:
@@ -123,6 +129,7 @@ Conda will figure out which versions of everything are compatible and download t
 
 > **If it fails:** Read the error message. Conda usually names the package that's causing the problem. Try removing it from the file or changing its version.
 
+(step-3-activate-the-environment)=
 ### Step 3: Activate the Environment
 
 ```bash
@@ -131,6 +138,7 @@ conda activate my_environment
 
 Activating an environment switches the terminal into that workspace, so any Python commands you run use that environment's packages. The terminal prompt will update to show the environment name, confirming it worked.
 
+(step-4-register-it-as-a-notebook-kernel)=
 ### Step 4: Register It as a Notebook Kernel
 
 A new environment isn't automatically available in Jupyter notebooks. To use the newly created environment, it has to be registered. Run this command **in the terminal** to register it:
@@ -139,6 +147,7 @@ A new environment isn't automatically available in Jupyter notebooks. To use the
 python -m ipykernel install --user --name my_environment --display-name "Python (my_environment)"
 ```
 
+(step-5-switch-to-your-environment-in-a-notebook)=
 ### Step 5: Switch to Your Environment in a Notebook
 
 1. Open a notebook and go to **Kernel > Change Kernel…**
@@ -157,6 +166,7 @@ python -m ipykernel install --user --name my_environment --display-name "Python 
 
 ---
 
+(quick-reference-for-environments)=
 ## Quick Reference for Environments
 
 | What you want to do | Command |
@@ -172,14 +182,17 @@ python -m ipykernel install --user --name my_environment --display-name "Python 
 
 ---
 
+(installing-non-python-software)=
 ## Installing Non-Python Software
 
 Software that is not purely Python can be installed with either the Ubuntu package manager, `apt-get`, or compiled from source.
 
+(installing-ubuntu-packages)=
 ### Installing Ubuntu Packages
 
 Some software can be installed via the terminal using `apt-get`. Be advised that users cannot run commands as superusers; i.e., `sudo` will not work, and permissions _cannot_ be granted to individual users. If you need to install something foundational, please create a [custom image](./building_custom_images.md).
 
+(c-c-fortran-compilers)=
 ### C/C++/Fortran Compilers
 
 GeoLab images have `gcc`, `g++`, and `gfortran` installed. You will need to move the application source files to your home directory and compile them within GeoLab.

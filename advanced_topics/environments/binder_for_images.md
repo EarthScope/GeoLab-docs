@@ -4,6 +4,7 @@ There are two ways to launch a custom environment in GeoLab. The first is to [Bu
 
 ---
 
+(what-is-geolab-binder)=
 ## What Is GeoLab Binder?
 
 GeoLab Binder lets you launch a session from a GitHub repository instead of a prebuilt image. You put configuration files in your repo that describe what packages you need, and GeoLab builds the environment automatically when you start a session.
@@ -18,6 +19,7 @@ Both approaches run inside GeoLab, so you have the same access to EarthScope dat
 
 ---
 
+(geolab-binder-vs-custom-image)=
 ## GeoLab Binder vs. Custom Image
 
 Both approaches use GeoLab's environment selector, but they use different options. The difference is what you select and what you paste.
@@ -38,6 +40,7 @@ Both approaches use GeoLab's environment selector, but they use different option
 
 ---
 
+(before-you-start)=
 ## Before You Start
 
 You need:
@@ -49,6 +52,7 @@ No local Docker builds or container registry required.
 
 ---
 
+(step-1-set-up-your-github-repository)=
 ## Step 1: Set Up Your GitHub Repository
 
 Create a new repository on GitHub (or use an existing one). Add your notebooks and at least one configuration file:
@@ -67,8 +71,10 @@ Copy the `Dockerfile` from the `geolab-base` template at [EarthScope/GeoLab](htt
 
 ---
 
+(step-2-write-your-configuration-files)=
 ## Step 2: Write Your Configuration Files
 
+(binder-environmentyml-your-main-package-list)=
 ### `environment.yml`: Your Main Package List
 
 ```yaml
@@ -82,18 +88,21 @@ dependencies:
   - obspy
 ```
 
+(requirementstxt-pypi-only-packages-if-needed)=
 ### `requirements.txt`: PyPI-only Packages (If Needed)
 
 ```text
 some-pypi-package==1.2.3
 ```
 
+(apttxt-system-software-if-needed)=
 ### `apt.txt`: System Software (If Needed)
 
 ```text
 build-essential
 ```
 
+(postbuild-one-time-setup-commands-optional)=
 ### `postBuild`: One-time Setup Commands (Optional)
 
 If you need to run something after packages install, such as downloading a data file or enabling a Jupyter extension, create a `postBuild` file:
@@ -130,6 +139,7 @@ git push -u origin main
 
 ---
 
+(step-3-launch-from-your-repo-in-geolab)=
 ## Step 3: Launch from Your Repo in GeoLab
 
 1. Go to [earthscope.org/data/geolab](https://www.earthscope.org/data/geolab/) and click **Launch GeoLab**.
@@ -148,6 +158,7 @@ git push -u origin main
 
 ---
 
+(step-4-share-your-environment)=
 ## Step 4: Share Your Environment
 
 To share your environment with someone else, give them the git clone URL for your repository. They follow the same steps: go to GeoLab, choose **Build your own image**, paste the URL, and launch.
@@ -156,6 +167,7 @@ Because the environment is defined by files in the repo, anyone who uses the sam
 
 ---
 
+(updating-your-environment)=
 ## Updating Your Environment
 
 Edit your configuration files, commit, and push. The next GeoLab launch from that repo URL will rebuild with the updated packages.
@@ -171,6 +183,7 @@ git push
 
 ---
 
+(binder-quick-reference)=
 ## Quick Reference
 
 | What you want to do | How |
