@@ -4,6 +4,7 @@ A GeoLab image is a complete, prepackaged computing environment that runs in Jup
 
 ---
 
+(how-it-works)=
 ## How It Works
 
 Think of an **image** as a recipe with each Python package as an ingredient. An **image** is the meal created from the recipe. Finally, a **container** is the meal served on a plate. The recipe doesn't change and you can make the same meal over and over. GeoLab does the same thing: it takes your image and launches a fresh session from it every time.
@@ -16,6 +17,7 @@ Edit config files  →  Docker builds  →  Image  →  Push image to repository
 
 ---
 
+(before-starting)=
 ## Before Starting
 
 Two pieces of software must be installed on **your computer**:
@@ -36,6 +38,7 @@ In addition to the required software, a **GitHub** account at [github.com](https
 
 ---
 
+(step-1-get-the-template)=
 ## Step 1: Get the Template
 
 EarthScope provides a starter template. Download it using git to set up a working folder:
@@ -63,8 +66,10 @@ my-geolab-image/
 
 ---
 
+(step-2-add-your-packages)=
 ## Step 2: Add Your Packages
 
+(custom-image-environmentyml-your-main-package-list)=
 ### `environment.yml`: Your Main Package List
 
 Add conda Python packages from `conda-forge` here. Open the file and add packages under the `dependencies` section:
@@ -87,6 +92,7 @@ dependencies:
 
 Conda packages are preferred, because conda checks that everything works together before installing and reduces the possibility of dependency conflicts among packages.
 
+(requirementstxt-packages-only-on-pypi)=
 ### `requirements.txt`: Packages Only on PyPI
 
 Some packages aren't available through conda-forge and must be installed from PyPI. Add them here, one per line:
@@ -96,6 +102,7 @@ earthscope-sdk==1.4.1
 seisbench
 ```
 
+(apttxt-system-software-rarely-needed)=
 ### `apt.txt`: System Software (Rarely Needed)
 
 Most scientific packages go in `environment.yml`. Only use `apt.txt` for low-level system tools that can't be installed any other way:
@@ -107,6 +114,7 @@ git
 
 ---
 
+(step-3-build-and-test-locally)=
 ## Step 3: Build and Test Locally
 
 Before publishing, build the image on your computer and make sure everything works.
@@ -218,6 +226,7 @@ Each package gets a pass or fail which is display in the **Summary** cell of the
 
 ---
 
+(step-4-publish-your-image-to-docker-hub)=
 ## Step 4: Publish Your Image to Docker Hub
 
 Once the local test passes, rebuild the image for GeoLab's platform and push it to a container registry.
@@ -244,6 +253,7 @@ docker push your-docker-username/my-geolab-image:0.1.0
 
 By default, images published to Docker Hub are public and available for use with GeoLab.
 
+(publishing-to-github-or-aws-image-repositories)=
 ### Publishing to GitHub or AWS Image Repositories
 
 Alternatives to Docker Hub include GitHub Container Registry (ghcr) or AWS Elastic Container Registry (ECR). Choosing an image repository depends on user requirements. GitHub features a tight integration with CI (Continuous Integration) through GitHub Actions that can trigger an image build and push to ghcr. This automates the process of building and pushing an image through a `pull request`. AWS ECR offers cloud-scale uploads and downloads to support multiple instances of GeoLab requested by hundreds of users or more.
@@ -252,6 +262,7 @@ Both ghcr and ECR have more stringent authorization practices and controls over 
 
 ---
 
+(step-5-launch-it-in-geolab)=
 ## Step 5: Launch It in GeoLab
 
 1. Go to [earthscope.org/data/geolab](https://www.earthscope.org/data/geolab/) and click **Launch GeoLab**.
@@ -266,6 +277,7 @@ GeoLab will pull your image and launch a session from it. The first launch takes
 
 ---
 
+(making-changes-later)=
 ## Making Changes Later
 
 Edit your config files, then rebuild and push with a new version number:
@@ -280,6 +292,7 @@ docker push ghcr.io/your-github-username/my-geolab-image:0.1.1
 
 > **Always use a new version number** (`0.1.1`, `0.1.2`, etc.) when you rebuild. If you reuse the same tag, GeoLab may load the old cached version instead of your new one.
 
+(troubleshooting-package-installation)=
 ## Troubleshooting Package Installation
 
 In general, it's best practice to install packages using the conda package manager for the GeoLab image. Conda checks packages for dependencies which ensures that dependency conflicts are resolved in the environment. Conda has a search function to discover packages.
@@ -288,6 +301,7 @@ Some packages are only available in PyPI and are installed with the pip package 
 
 > **Tip:** Keep mind that installation name and import name can be different (such as, scikit-learn vs sklearn).
 
+(find-if-a-conda-package-is-available)=
 ### Find If a Conda Package Is Available
 
 To find if a package is available through the conda package manager, you can use `conda search`:
@@ -296,6 +310,7 @@ To find if a package is available through the conda package manager, you can use
 conda search -c conda-forge #PackageName(e.g., seisbench)
 ```
 
+(find-if-a-package-is-available-on-pypi)=
 ### Find If a Package Is Available On PyPI
 
 To find if a package is available through the pip package manager, you can use `the following command.
@@ -306,6 +321,7 @@ python -m pip index versions #PackageName(e.g., seisbench)
 
 ---
 
+(custom-image-quick-reference)=
 ## Quick Reference
 
 | What you want to do | Where to do it |
@@ -321,6 +337,7 @@ python -m pip index versions #PackageName(e.g., seisbench)
 
 ---
 
+(getting-a-personal-access-token-for-ghcr)=
 ## Getting a Personal Access Token (for GHCR)
 
 Before you can push images to GHCR, you need a **Personal Access Token (PAT)** with package permissions:
