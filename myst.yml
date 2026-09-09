@@ -30,7 +30,7 @@ project:
         - file: advanced_topics/environments/index.md
           title: Managing Environments
           children:
-            - file: advanced_topics/environments/managing_environments.md
+            - file: advanced_topics/environments/creating_temporary_environments.md
             - file: advanced_topics/environments/building_custom_images.md
             - file: advanced_topics/environments/pushing_to_ghcr_ecr.md
             - file: advanced_topics/environments/binder_for_images.md
