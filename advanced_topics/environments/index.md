@@ -15,7 +15,7 @@ Use the `%pip` / `%conda` magic commands because they execute in the active Pyth
 %pip install pkgname
 ```
 
-For more information about managing environments, go to [`Managing Environments`](./managing_environments.md) for detailed instructions.
+For more information about managing environments, go to [`Creating Ephemeral Environments`](./creating_temporary_environments.md) for detailed instructions.
 
 (build-a-custom-image)=
 ## Build a Custom Image:
