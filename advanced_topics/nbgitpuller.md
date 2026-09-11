@@ -10,7 +10,7 @@ Importantly, nbgitpuller uses a **one-way merge** strategy: it pulls changes fro
 
 ## Generating a link
 
-The easiest way to create an nbgitpuller link is with the [nbgitpuller Link Generator](https://nbgitpuller.readthedocs.io/en/latest/link.html). You will need:
+The easiest way to create an nbgitpuller link is with the [nbgitpuller Link Generator for GeoLab](https://nbgitpuller.readthedocs.io/en/latest/link.html?hub=https://geolab.earthscope.cloud). You will need:
 
 - **JupyterHub URL** — the GeoLab hub URL
 - **Repository URL** — the public GitHub repository containing your notebooks
