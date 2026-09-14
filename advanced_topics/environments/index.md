@@ -1,13 +1,13 @@
 # Choosing Environments in GeoLab
 
-When you open GeoLab and select an environment, you launch a pre-configured virtual Python environment that includes commonly used geophysics software. You can install additional software and packages in GeoLab, using one of several options: emphemeral images, building a custom image, running an image in Binder, or using a pre-built third party image.
+When you open GeoLab and select an environment, you launch a pre-configured virtual Python environment that includes commonly used geophysics software. You can install additional software and packages in GeoLab, using one of several options: ephemeral install, building a custom image, running an image in Binder, or using a pre-built third party image.
 
 (how-to-choose)=
 ## How to choose
 
-Which environment to use depends on whether you want the environment to persist across session, installing software not available in the defautl environment, mutability of the environment, a reproducible environment, or the convenience of using a prebuilt environment.
+Which environment to use depends on whether you want the environment to persist across sessions, installing software not available in the default environment, mutability of the environment, a reproducible environment, or the convenience of using a prebuilt environment.
 
-- **[Ephemeral Installation](./creating_temporary_environments.md)** installs packages directly in a running notebook with `%pip`/`%conda`. It's the fastest way to get a package, but the install doesn't survive a new session, so it needs to be re-run each time.
+- **[Ephemeral Installation](./creating_temporary_environments.md)** installs packages directly in a running notebook with `%pip` or`%conda`. It's the fastest way to get a package, but the install doesn't persist when you close GeoLab and start a new session. We recommend adding these commands to the beginning of a notebook to ensure the required packages are installed and available each time the notebook runs.
 - **[Build a Custom Image](./building_custom_images.md)** uses Docker to package your environment into an image you push to a repository (Docker Hub, GHCR, or ECR). GeoLab launches that exact image every time, so it's the most reproducible option, at the cost of needing Docker and a repository account.
 - **[Run an Image From a GitHub Code Repository With Binder](./binder_for_images.md)** skips Docker and a repository: GeoLab reads config files from a GitHub repo and builds the image for you. It's easier to set up and share than a custom image, but GeoLab rebuilds it from scratch on every launch. Changes to the GitHub repository allows you to change the environment with having to build and host an image.
 - **[Bring a JupyterHub Image](#bring-a-jupyterhub-image)** reuses a third-party image someone else already built and published, such as one maintained by NASA or NOAA. It works the same way as launching a custom image — you just didn't build the image yourself.
