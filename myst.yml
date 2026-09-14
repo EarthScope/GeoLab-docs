@@ -21,12 +21,8 @@ project:
         - file: getting_started/notebooks.md
         - file: getting_started/using_git.md
         - file: getting_started/user_storage.md
-        - file: getting_started/quotas.md
-        - file: getting_started/examples_tutorials.md
     - title: Advanced Topics
       children:
-        - file: advanced_topics/dask.md
-        - file: advanced_topics/nbgitpuller.md
         - file: advanced_topics/environments/index.md
           title: Managing Environments
           children:
