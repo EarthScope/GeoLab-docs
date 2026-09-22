@@ -16,8 +16,8 @@ special "proxy" extension is needed.
 On your laptop:
 
 - **VS Code**
-- **JupyterHub extension** (`JupyterHub`)
-- **Python extension** (`ms-python.python`)
+- **VS Code JupyterHub extension** (`JupyterHub`)
+- **VS Code Python extension** (`ms-python.python`)
 
 In GeoLab:
 
@@ -40,7 +40,7 @@ from jupyter_server.serverapp import list_running_servers
 
 data = list(list_running_servers())
 
-def to_vscode_url(server_info, hub_host="https://geolab.earthscope.cloud"):
+def to_VS Code_url(server_info, hub_host="https://geolab.earthscope.cloud"):
     """Convert jupyter_server list output into a VS Code-connectable URL.
 
     Replaces the internal 0.0.0.0:8888 URL with the public Hub host,
@@ -51,7 +51,7 @@ def to_vscode_url(server_info, hub_host="https://geolab.earthscope.cloud"):
     token = s["token"]
     return f"{hub_host.rstrip('/')}{base_url}/?token={token}"
 
-print(to_vscode_url(data))
+print(to_VS Code_url(data))
 ```
 
 This prints a line like:
@@ -89,7 +89,7 @@ Copy that entire line — you will paste it into VS Code in the next section.
 
 3. Click the **kernel picker** in the top-right of the notebook ("Select Kernel").
 
-![Select kernel](../img/select_kernel_vscode.png)
+![Select kernel](../img/select_kernel_VS Code.png)
 
 4. Choose **Enter the URL of the running JupyterHub Server...**
 
@@ -100,11 +100,11 @@ Copy that entire line — you will paste it into VS Code in the next section.
 
 ![Exisiting Jupyter Server](../img/enter_jupyterhub_url.png)
 
-7. Press `Enter` for **Enter your username..**
+7. The VS Code extension extracts the username from the GeoLab URL and populates the input box. Press `Enter` for **Enter your username..**
 
 ![Enter username (press Enter)](../img/jupyterhub_enter_username.png)
 
-8. Press `Enter` for **Enter your password or API token...**.
+8. The VS Code extension extracts the API token from the GeoLab URL and populates the input box. Press `Enter` for **Enter your password or API token...**.
 
 ![Accept display name](../img/jupyterhub_enter_password.png)
 
