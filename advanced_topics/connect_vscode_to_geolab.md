@@ -16,8 +16,8 @@ special "proxy" extension is needed.
 On your laptop:
 
 - **VS Code**
-- **Jupyter extension** (`ms-toolsai.jupyter`)
-- **Python extension** (`ms-python.python`) — installed automatically as a dependency of the Jupyter extension
+- **VS Code JupyterHub extension** (`JupyterHub`)
+- **VS Code Python extension** (`ms-python.python`)
 
 In GeoLab:
 
@@ -40,7 +40,7 @@ from jupyter_server.serverapp import list_running_servers
 
 data = list(list_running_servers())
 
-def to_vscode_url(server_info, hub_host="https://geolab.earthscope.cloud"):
+def to_VS Code_url(server_info, hub_host="https://geolab.earthscope.cloud"):
     """Convert jupyter_server list output into a VS Code-connectable URL.
 
     Replaces the internal 0.0.0.0:8888 URL with the public Hub host,
@@ -51,7 +51,7 @@ def to_vscode_url(server_info, hub_host="https://geolab.earthscope.cloud"):
     token = s["token"]
     return f"{hub_host.rstrip('/')}{base_url}/?token={token}"
 
-print(to_vscode_url(data))
+print(to_VS Code_url(data))
 ```
 
 This prints a line like:
@@ -80,43 +80,43 @@ Copy that entire line — you will paste it into VS Code in the next section.
 
 ## VS Code side: connect to the server
 
-1. Install the **Jupyter** extension (`ms-toolsai.jupyter`) from the Extensions
+1. Install the **Jupyter** extension (`JupyterHub`) from the Extensions
    view if you have not already.
 
-![Installing ms-toolsai](../img/add_ms-toolsai_extension.png)
+![Installing ms-toolsai](../img/jupyterhub.png)
 
 2. Open or create a notebook file (`.ipynb`) in VS Code.
 
-3. Click the **kernel picker** in the top-right of the notebook (it may read
-   "Select Kernel").
+3. Click the **kernel picker** in the top-right of the notebook ("Select Kernel").
 
-![Select Kernel](../img/select_kernel_vscode.png)
+![Select kernel](../img/select_kernel_VS Code.png)
 
-4. Choose **Select Another Kernel...**
+4. Choose **Enter the URL of the running JupyterHub Server...**
 
-![Select anther kernel](../img/select_another_kernel.png)
+![Select anther kernel](../img/select_a_jupyter_server.png)
 
-5. Choose **Existing Jupyter Server...**
-
-![Exisiting Jupyter Server](../img/existing_jupyter_server.png)
-
-6. Choose **Enter the URL of a running Jupyter server**.
-
-![Enter URL](../img/enter_url_jupyter_server.png)
-
-7. Paste the full tokenized URL you copied from GeoLab, including the
+5. Choose **Enter the URL of running JupyterHub server**. Paste the full tokenized URL you copied from GeoLab, including the
    `?token=...` part, then press Enter.
 
-8. When prompted, accept or edit the display name for the server.
+![Exisiting Jupyter Server](../img/enter_jupyterhub_url.png)
 
-![Accept display name](../img/jupyter_server_display_name.png)
+7. The VS Code extension extracts the username from the GeoLab URL and populates the input box. Press `Enter` for **Enter your username..**
 
-9. Back in the kernel picker, select the kernel exposed by the remote server
-   (for example, the Python 3 kernel from your GeoLab environment).
+![Enter username (press Enter)](../img/jupyterhub_enter_username.png)
 
-![Select kernel](../img/select_jupyter_kernel.png)
+8. The VS Code extension extracts the API token from the GeoLab URL and populates the input box. Press `Enter` for **Enter your password or API token...**.
 
-10. Run a cell to confirm. Execution now happens inside your GeoLab pod, using
+![Accept display name](../img/jupyterhub_enter_password.png)
+
+9. Optional: **Change server name**
+
+![Change server name (optional)](../img/jupyterhub_change_server_name.png)
+
+10.  **Select a Kernel from JupyterHub GeoLab**. Choose `Python 3 (ipykernel)` to select a new kernel.
+
+![Select kernel](../img/jupyterhub_select_kernel.png)
+
+11. Run a cell to confirm. Execution now happens inside your GeoLab pod, using
     the GeoLab environment and compute — not your laptop.
 
 ---
