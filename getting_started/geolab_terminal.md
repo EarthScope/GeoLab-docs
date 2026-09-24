@@ -16,3 +16,10 @@ Clicking the **X** on a terminal tab closes the tab but does not stop the proces
 Your default path `:~` in the Terminal window refers to `/home/jovyan`. This is prefaced by the user id, or `jovyan@jupyter-your-unique-account-identification-number` which is tied to your email or Google/Cilogon profile. Due to the NSF NGF's authentication implementation, there is no convenient way to shorten this path prefix in the terminal display. 
 
 `Jovyan` users do not have administrator or root permissions, and therefore cannot use the `sudo` command to override system commands.
+
+## Checking GeoLab Image Version
+GeoLab environments can change with updates to software and packages. GeoLab images are versioned to ensure that work can be reproduced using the same packages and software. To check the GeoLab version, type the following command in the termina.
+
+```
+echo $GEOLAB_VERSION
+```
