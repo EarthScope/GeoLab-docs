@@ -40,7 +40,7 @@ from jupyter_server.serverapp import list_running_servers
 
 data = list(list_running_servers())
 
-def to_VS Code_url(server_info, hub_host="https://geolab.earthscope.cloud"):
+def to_VS_Code_url(server_info, hub_host="https://geolab.earthscope.cloud"):
     """Convert jupyter_server list output into a VS Code-connectable URL.
 
     Replaces the internal 0.0.0.0:8888 URL with the public Hub host,
@@ -51,7 +51,7 @@ def to_VS Code_url(server_info, hub_host="https://geolab.earthscope.cloud"):
     token = s["token"]
     return f"{hub_host.rstrip('/')}{base_url}/?token={token}"
 
-print(to_VS Code_url(data))
+print(to_VS_Code_url(data))
 ```
 
 This prints a line like:
