@@ -8,6 +8,6 @@ This documentation provides basic information about getting started in GeoLab an
 :class: seealso
 * [Launch GeoLab]( {{ geolab_home }} )
 * [GeoLab Infrastructure GitHub Repository]({{ geolab_github }}) 
-* [GeoLab Learning Hub]( {{ learning_hub }} )
+* [Data Access Tutorials]( {{ geolab_tutorials }} )
 * [Community Forum]({{ discourse }})
 ```

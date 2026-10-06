@@ -16,7 +16,8 @@ To get going in GeoLab, you'll need to:
 5. **Familiarize yourself with resource limitations and storage best-practice while working in the cloud.** The NSF NGF needs your help to conserve resources to ensure we can continue to offer this platform to researchers at no cost.
     - [File Systems and Data Storage](./user_storage.md) — Understand your storage options and limits.
     - [Resource Quotas](./quotas.md) — How compute credits work and how to manage your usage.
-6. Get stuck? [Ask for help!](../help.md)
-7. Join the conversation on our [Community Forum]( {{ discourse }})
+6. **Learn how to access NSF NGF Data.**  Tutorials are available in our [github repository]( {{ geolab_tutorials }} ).
+7. Get stuck? [Ask for help!](../help.md)
+8. Join the conversation on our [Community Forum]( {{ discourse }})
 
 **Want something more structured? All of this material and more is covered in our FREE, self-paced online course, [Cloud Foundations](./examples_tutorials.md/#cloud-foundations)** 
