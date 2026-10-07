@@ -42,10 +42,10 @@ Shared storage is useful for common notebooks and (smallish) data sets for works
 ## The `/tmp` directory
 Any location outside of `/home/jovyan` is ephemeral. This means if you add data or scripts under a writeable directory like `/tmp/myfile.txt` _it will not be there when you log out and log back in._
 
-Nevertheless, `/tmp` is a convenient location for storing data temporarily because it is a fast SSD drive. The space available depends on your server but will generally be much larger than `/home/jovyan` (50-100s of GB). **We recommend using `/tmp` for moderately-sized intermediate datasets.**
+Nevertheless, `/tmp` is a convenient location for storing data temporarily because it is a fast SSD drive. The standard `/tmp` capacity is 20GB; if larger `/tmp` storage is required please contact an adminstrator via help@earthscope.org. **We recommend using `/tmp` for moderately-sized intermediate datasets.**
 
 ## The `scratch` bucket storage
-Through GeoLab, you have access to a temporary `scratch` bucket. This is an AWS S3 cloud storage bucket designed for _temporary_ storage of large datasets. Data in scratch buckets will be automatically deleted after 7 days.
+Through GeoLab, you have access to a temporary `scratch` bucket. This is an AWS S3 cloud storage bucket designed for _temporary_ storage of large datasets. Individual objects in scratch buckets will be automatically deleted 7 days after their last-modified date.
 
 You can check the name of your scratch bucket by opening a Terminal in your hub and running the command:
 
