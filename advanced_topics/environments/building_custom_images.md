@@ -254,7 +254,7 @@ Both ghcr and ECR have more stringent authorization practices and controls over 
 
 ## Step 5: Launch It in GeoLab
 
-1. Go to [earthscope.org/data/geolab](https://www.earthscope.org/data/geolab/) and click **Launch GeoLab**.
+1. Go to [ngf.earthscope.org/data/geolab](https://ngf.earthscope.org/data/geolab) and click **Launch GeoLab**.
 2. Enter your username and password, then click **Continue**.
 3. If a **Stop My Server** button appears, click it first.
 4. Click **Start My Server**.
@@ -298,7 +298,7 @@ conda search -c conda-forge #PackageName(e.g., seisbench)
 
 ### Find If a Package Is Available On PyPI
 
-To find if a package is available through the pip package manager, you can use `the following command.
+To find if a package is available through the pip package manager, you can use the following command.
 
 ```bash
 python -m pip index versions #PackageName(e.g., seisbench)

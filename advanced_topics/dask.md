@@ -474,4 +474,4 @@ These tutorials provide examples demonstrating how to use dask for seismic analy
 
 - [When and how to use dask delayed and futures.](https://github.com/EarthScope/geolab-tutorials/blob/main/advanced_compute/dask/01_dask_operation.ipynb)
 - [A seismic workflow example.](https://github.com/EarthScope/geolab-tutorials/blob/main/advanced_compute/dask/02_dask_application.ipynb)
-- [Using dask to prepare data for seismic picking with seisbench.](https://github.com/EarthScope/geolab-tutorials/blob/main/advanced_compute/dask/02_dask_application.ipynb)
+- [Using dask to prepare data for seismic picking with seisbench.](https://github.com/EarthScope/geolab-tutorials/blob/main/advanced_compute/dask/03_dask_scaling.ipynb)

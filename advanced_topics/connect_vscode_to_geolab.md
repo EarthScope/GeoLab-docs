@@ -89,7 +89,7 @@ Copy that entire line — you will paste it into VS Code in the next section.
 
 3. Click the **kernel picker** in the top-right of the notebook ("Select Kernel").
 
-![Select kernel](../img/select_kernel_VS Code.png)
+![Select kernel](../img/select_kernel_vscode.png)
 
 4. Choose **Enter the URL of the running JupyterHub Server...**
 

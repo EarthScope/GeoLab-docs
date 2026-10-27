@@ -9,7 +9,7 @@ If you need increased access to GeoLab resources (i.e., larger instance sizes, G
 Please note that GeoLab is being offered to the community as a free service, paid for by grant funds to EarthScope from the National Science Foundation. Access to increased compute resources is restricted in order to control costs. Please prototype your analyses on smaller servers before requesting more resources, and justify your request as you would in a grant proposal. In some cases, we may encourage you to rethink your computational approach in order to use resources more efficiently. -->
 
 ## GeoLab Community Forum
-Join the GeoLab conversation on Discourse! Launching June 2026, the GeoLab Community Forum is designed to facilitate conversations amongst geoscientists  in the cloud.
+Join the GeoLab conversation on Discourse! Launching June 2026, the GeoLab Community Forum is designed to facilitate conversations amongst geoscientists in the cloud.
 
 This resource is most effective for the following types of support:
 - learning about software updates to GeoLab, configuration changes, outage announcements, etc 

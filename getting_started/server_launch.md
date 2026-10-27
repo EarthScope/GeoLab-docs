@@ -4,10 +4,10 @@ GeoLab offers several cloud server configurations. Use the menu options on this 
 ![image](../img/server_options.png)
 
 ## Select an Environment
-Several pre-configured compute environments are available from the dropdown menu. Please see [Environment Management](../advanced_topics/env_mgmt.md) for details on customizing your environment after launch or bringing your own image.
+Several pre-configured compute environments are available from the dropdown menu. Please see [Environment Management](../advanced_topics/environments/index.md) for details on customizing your environment after launch or bringing your own image.
 
 ```{dropdown} GeoLab
-The default GeoLab image contains a variety of Python packages for a broad range of geophysical data analysis. It inherits all software in [pangeo/base_image](https://github.com/pangeo-data/pangeo-docker-images/base_image), with additional support for the EarthScope SDK/CLI and other geophysics tools. For a more thorough description of the image, see the GeoLab github {{ geolab_github }}.
+The default GeoLab image contains a variety of Python packages for a broad range of geophysical data analysis. It inherits all software in [pangeo/base_image](https://hub.docker.com/r/pangeo/base-image), with additional support for the EarthScope SDK/CLI and other geophysics tools. For a more thorough description of the image, see the GeoLab github {{ geolab_github }}.
 ```
 
 ```{dropdown} SeaFloor Geodesy
@@ -27,11 +27,11 @@ The NSF NGF supports educational short courses hosted in GeoLab throughout the y
 ```
 
 ```{dropdown} Other...
-GeoLab is compatible with custom environments configured to run in JupyterHub. Custom images must be publicly available Docker containers (e.g., on AWS ECR, DockerHub, or quay.io). Select **Other** from the dropdown and paste the public URL of your container. See [Environment Management](../advanced_topics/env_mgmt.md) for details.
+GeoLab is compatible with custom environments configured to run in JupyterHub. Custom images must be publicly available Docker containers (e.g., on AWS ECR, DockerHub, or quay.io). Select **Other** from the dropdown and paste the public URL of your container. See [Environment Management](../advanced_topics/environments/index.md) for details.
 ```
 
 ```{dropdown} Build Your Own Image
-GeoLab includes a mybinder extension for building a custom environment dynamically from a GitHub repository. See [Environment Management](../advanced_topics/env_mgmt.md) for instructions.
+GeoLab includes a mybinder extension for building a custom environment dynamically from a GitHub repository. See [Environment Management](../advanced_topics/environments/index.md) for instructions.
 ```
 
 ## Select your Resource Allocation
