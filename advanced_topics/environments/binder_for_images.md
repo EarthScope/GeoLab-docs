@@ -1,6 +1,6 @@
 # GeoLab Binder
 
-There are two ways to launch a custom environment in GeoLab. The first is to [Build a custom image](custom_image_page.md) and push it to a registry, and specify the image URL when launching GeoLab. The second, called **GeoLab Binder**, is to point GeoLab at a GitHub repository and let it build the environment for you. This guide covers how the second approach works and when to use it.
+There are two ways to launch a custom environment in GeoLab. The first is to [Build a custom image](./building_custom_images.md) and push it to a registry, and specify the image URL when launching GeoLab. The second, called **GeoLab Binder**, is to point GeoLab at a GitHub repository and let it build the environment for you. This guide covers how the second approach works and when to use it.
 
 ---
 
@@ -132,7 +132,7 @@ git push -u origin main
 
 ## Step 3: Launch from Your Repo in GeoLab
 
-1. Go to [earthscope.org/data/geolab](https://www.earthscope.org/data/geolab/) and click **Launch GeoLab**.
+1. Go to [ngf.earthscope.org/data/geolab](https://ngf.earthscope.org/data/geolab/) and click **Launch GeoLab**.
 2. Enter your username and password, then click **Continue**.
 3. In the environment selector, choose **Build your own image**.
 4. In the **Repository** field, paste the git clone URL for your repository:
