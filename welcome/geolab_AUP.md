@@ -48,7 +48,7 @@ The GeoLab JupyterHub environment provided by the EarthScope-operated NSF Nation
   - Temporary suspension of access for repeated or serious violations.
   - Permanent revocation of access for severe offenses.
 
-Reports can be made to EarthScope administrators via email: help@earthscope.org
+Reports can be made to EarthScope administrators via email: hr@earthscope.org
 
 ## Updates & Amendments
 

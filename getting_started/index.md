@@ -11,7 +11,7 @@ To get going in GeoLab, you'll need to:
 4. If you're not familiar with the Jupyter Hub environment or working with python notebooks, peruse the following pages to get oriented:
     - [Navigating GeoLab](./basic_navigation.md) — A tour of the JupyterLab interface, sidebar, and tools.
     - [Using the Terminal](./geolab_terminal.md) — Open and manage terminal sessions within GeoLab.
-    - [Working with Notebooks](./How_to_Notebook.md) — Create, run, and organize Jupyter Notebooks.
+    - [Working with Notebooks](./notebooks.md) — Create, run, and organize Jupyter Notebooks.
     - [Using Git](./using_git.md) — Clone repositories and manage version control from within GeoLab.
 5. **Familiarize yourself with resource limitations and storage best-practice while working in the cloud.** The NSF NGF needs your help to conserve resources to ensure we can continue to offer this platform to researchers at no cost.
     - [File Systems and Data Storage](./user_storage.md) — Understand your storage options and limits.

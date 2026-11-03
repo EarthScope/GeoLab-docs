@@ -75,7 +75,7 @@ Or, for packages only available on PyPI (a different package source):
 
 The best method to create a custom environment is to write a file that lists every package required. Conda reads the file and builds the environment from it. This ensures you can recreate the exact same environment later, and the file can be shared, making the environment reproducible.
 
-> **IMPORTANT**: This section describes building a new environment that does not include the packages in the default GeoLab environment.
+> **IMPORTANT** This section describes building a new environment that does not include the packages in the default GeoLab environment.
 
 ### Step 1: Write an `environment.yml` File
 
