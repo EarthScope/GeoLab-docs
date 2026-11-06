@@ -7,7 +7,7 @@ GeoLab offers several cloud server configurations. Use the menu options on this 
 Several pre-configured compute environments are available from the dropdown menu. Please see [Environment Management](../advanced_topics/environments/index.md) for details on customizing your environment after launch or bringing your own image.
 
 ```{dropdown} GeoLab
-The default GeoLab image contains a variety of Python packages for a broad range of geophysical data analysis. It inherits all software in [pangeo/base_image](https://hub.docker.com/r/pangeo/base-image), with additional support for the EarthScope SDK/CLI and other geophysics tools. For a more thorough description of the image, see the GeoLab github {{ geolab_github }}.
+The default GeoLab image contains a variety of Python packages for a broad range of geophysical data analysis. It inherits all software in [pangeo/base_image](https://hub.docker.com/r/pangeo/base-image), with additional support for the EarthScope SDK/CLI and other geophysics tools. For a more thorough description of the image, see the [GeoLab github]({{ geolab_github }}).
 ```
 
 ```{dropdown} SeaFloor Geodesy
@@ -45,7 +45,7 @@ To request a larger server or GPU access, email help@earthscope.org or fill out 
 
 ## Stopping Your Server and Logging Out
 
-**Always stop your server before closing your browser tab or logging out.** Logging out without stopping your server first can cause errors on your next login. And, running servers will deplete your compute quotas whether the browser tab is open or not. 
+**Always stop your server before closing your browser tab or logging out.** Logging out without stopping your server first can cause errors on your next login. And, running servers will deplete your compute quotas whether the browser tab is open or not.
 
 1. Go to **File → Hub Control Panel** and click **Stop My Server**.
 2. Once the button disappears, click **Log Out** in the upper right corner.
