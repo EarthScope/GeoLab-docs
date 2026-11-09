@@ -16,6 +16,7 @@ The easiest way to create an nbgitpuller link is with the [nbgitpuller Link Gene
 - **Repository URL** — the public GitHub repository containing your notebooks
 - **Branch** — the branch to pull from (usually `main`)
 - **File to open** — the path to the notebook or file to open on launch (optional)
+- **Application to open** - Select `JupyterLab` to enable the full GeoLab functionality. Select `Classic Jupyter Notebook` to launch a minimal notebook interface (e.g. for demos where participants don't need to access a terminal or navigate beyond a single file.)
 
 ## Further reading
 
