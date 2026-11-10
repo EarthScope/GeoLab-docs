@@ -26,6 +26,7 @@ project:
     - title: Advanced Topics
       children:
         - file: advanced_topics/dask.md
+        - file: advanced_topics/using_s3_buckets.md
         - file: advanced_topics/nbgitpuller.md
         - file: advanced_topics/connect_vscode_to_geolab.md
         - file: advanced_topics/environments/index.md
