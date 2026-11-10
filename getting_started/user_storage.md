@@ -54,9 +54,9 @@ $ echo $SCRATCH_BUCKET
 s3://earthscope-scratch/<username>
 ```
 
-There are many ways to interact with S3 buckets, e.g., through the command line, or with python libraries like fsspec. See [Working with the S3 SCRATCH_BUCKET](./advanced_topics/scratch_bucket.md) for more details on using the scratch bucket.
+There are many ways to interact with S3 buckets, e.g., through the command line, or with python libraries like fsspec. See [Using S3 Buckets](../advanced_topics/using_s3_buckets.md) for more details on using the scratch bucket and your own S3 bucket.
  
  > Please note that to keep GeoLab free for users, EarthScope does not offer persistent buckets. See below for details on bringing your own data bucket. 
 
 ## Bring your own S3 bucket
-If you wish to bring your own data to GeoLab, we recommend you create your own AWS S3 bucket and use it from GeoLab. We recommend setting it up in the `us-east-2` AWS region, which is where GeoLab operates, to minimize transfer latency and costs. More details on configuring an AWS account can be found here: https://aws.amazon.com/pm/serv-s3/ . Please note that you will need to configure your bucket access policies. See [Using Your Own S3 Bucket in us-east-2](../advanced_topics/scratch_bucket.md#using-your-own-s3-bucket-in-us-east-2) for step-by-step instructions.  
+If you wish to bring your own data to GeoLab, we recommend you create your own AWS S3 bucket and use it from GeoLab. We recommend setting it up in the `us-east-2` AWS region, which is where GeoLab operates, to minimize transfer latency and costs. More details on configuring an AWS account can be found here: https://aws.amazon.com/pm/serv-s3/ . Please note that you will need to configure your bucket access policies. See [Using Your Own S3 Bucket in us-east-2](../advanced_topics/using_s3_buckets.md#using-your-own-s3-bucket-in-us-east-2) for step-by-step instructions.  

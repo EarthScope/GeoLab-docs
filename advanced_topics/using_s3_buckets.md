@@ -1,4 +1,4 @@
-# Using the Scratch Bucket
+# Using S3 Buckets
 
 GeoLab gives every user a temporary scratch bucket in Amazon S3 for large intermediate results. This page introduces object storage and shows you how to use the scratch bucket from the Terminal and from Python. It also covers connecting your own S3 bucket for data you want to keep. For an overview of all storage options, see [File Systems and Data Storage](../getting_started/user_storage.md).
 
@@ -55,8 +55,8 @@ The table summarizes the differences:
 | **Organization** | A hierarchy of directories | A flat bucket of keys. The `/` in a key only looks like a folder path; S3 has no real directories |
 | **Access** | The operating system's file calls (`open`, `ls`, `cp`) | HTTP requests through an API (`aws s3`, `fsspec`, `boto3`, `s3fs`) |
 | **Editing** | Change part of a file in place | Objects are replaced whole; to change one byte you rewrite the object |
-| **Scale** | Limited by the size of the disk ([50 GB](../getting_started/quotas.md) for a GeoLab home directory) | Effectively unlimited; you pay for what you store |
-| **Sharing** | Attached only to your GeoLab server. | Readable from your GeoLab server and from all your [Dask Gateway](./dask.md) workers at once, so workers can read inputs and write results directly |
+| **Scale** | Limited by the size of the disk ([50 GB](../getting_started/quotas.md) for a GeoLab home directory) | Effectively unlimited; you pay for what you store. The scratch bucket is managed by EarthScope and data is kept for only seven days to keep minimize costs and to keep access free to users. |
+| **Sharing** | Attached only to your GeoLab server. | The **scratch bucket** is not private and is stored under your user ID prefix, which you can share with other GeoLab users. **Your own bucket** can be shared by granting users IAM permissions in the AWS console. |
 | **Speed** | Low latency for small, frequent reads and writes | Higher latency per request, but high throughput for large or parallel reads |
 
 ## Using the Scratch Bucket in GeoLab
@@ -109,7 +109,7 @@ s3://earthscope-scratch/<username>
 
 The examples below use `aws s3`. For more commands and options, run `aws s3 help`.
 
-- To add a file to the scratch bucket:
+- To add a file to the scratch bucket as an object:
 
   ```bash
   aws s3 cp ./IU.ANMO.mseed $SCRATCH_BUCKET/waveforms/2024/IU.ANMO.mseed
@@ -220,7 +220,7 @@ fs = fsspec.filesystem("s3")   # uses the GeoLab server's credentials
 SCRATCH_BUCKET = os.environ["SCRATCH_BUCKET"]
 ```
 
-- To add a file to the scratch bucket:
+- To add a file to the scratch bucket as an object:
 
   ```python
   fs.put("./IU.ANMO.mseed", f"{SCRATCH_BUCKET}/waveforms/2024/IU.ANMO.mseed")
@@ -325,7 +325,7 @@ SCRATCH_BUCKET = os.environ["SCRATCH_BUCKET"]
 
 ## Using Your Own S3 Bucket in us-east-2
 
-Objects in the scratch bucket are deleted 7 days after they were last created or modified. To keep results, or to share them with collaborators, store them in a bucket in your own AWS account.
+Objects in the scratch bucket are deleted 7 days after they were last created or modified. To keep results, or to share them with collaborators, you can store them in a bucket in your own AWS account. Note that you pay for storage; however, there are AWS programs for research and a Free Tier for trying out AWS services. See [Cloud Resources for Students and Researchers](#cloud-resources-for-students-and-researchers) to learn about these programs.
 
 GeoLab runs in the AWS **us-east-2** (Ohio) region, and it only lets you move data to buckets in us-east-2. AWS charges for data transferred between regions and out to the internet, but not for data moved between S3 and compute in the same region. Keeping your bucket in us-east-2 means copying data between GeoLab and your bucket doesn't add transfer costs.
 
@@ -442,3 +442,46 @@ If you have a collection of miniSEED files on an external hard drive, you can up
    Each file you read is one download request on your bucket. Because your bucket and GeoLab are both in us-east-2, there's no transfer fee, however large the files are.
 
 5. If you add or change files on the drive later, rerun the `sync` command from step 2 on your computer. It uploads only the new and changed files.
+
+## Cloud Resources for Students and Researchers
+
+You will need an AWS account to host your own S3 bucket which is billed to you. There are two AWS programs can help cover that cost.
+
+### AWS Cloud Credit for Research
+
+The [AWS Cloud Credit for Research](https://aws.amazon.com/government-education/research-and-technical-computing/cloud-credit-for-research/) program awards AWS Promotional Credit that you can use for AWS services, including S3 storage. It supports projects that:
+
+- build publicly available, cloud-hosted applications, software, or tools for your research community;
+- run proof-of-concept or benchmark tests of moving research workloads or open datasets to the cloud;
+- train others to use the cloud for research through workshops or tutorials.
+
+Program requirements and benefits:
+
+- **Who can apply:** full-time faculty and full-time research staff at an accredited research institution, and graduate, postgraduate, or PhD students enrolled at one.
+- **Award amounts:** amounts depend on your proposal and the usage it describes. Student awards are capped at $5,000; faculty and staff awards have no cap.
+- **Review time:** applications are reviewed year-round, and a review typically takes 90 to 120 days. Expedited reviews aren't available, so apply well before you need the credit.
+- **Limits:** for EC2, credit covers only On-Demand and Spot Instances. Credit expires, so plan your project timeline around its duration.
+- **Contact:** messages about applications come from `aws-research-credit@amazon.com`. Check your spam folder.
+
+To apply, use the [application form](https://pages.awscloud.com/aws-cloud-credit-for-research.html). Before applying, read the [FAQs](https://aws.amazon.com/government-education/research-and-technical-computing/cloud-credit-for-research/faqs/) and the [AWS Promotional Credit terms](https://aws.amazon.com/awscredits/). You can also browse [previous recipients](https://aws.amazon.com/government-education/research-and-technical-computing/cloud-credit-for-research/previous-recipients/) for examples of funded projects. If you're new to the cloud, [AWS Educate](https://aws.amazon.com/education/awseducate/) offers free training.
+
+### AWS Free Tier
+
+New AWS accounts can try AWS at no cost through the [AWS Free Tier](https://aws.amazon.com/free/). It's a way to test a personal bucket before committing to paying for one.
+
+Benefits:
+
+- **Credits:** new accounts get $100 in credits at sign-up and can earn up to $100 more by completing activities in the AWS console.
+- **Free plan:** you aren't charged unless you upgrade to the Paid plan. Most new customers don't need a payment method to sign up.
+- **Always Free services:** more than 30 AWS services are free up to monthly usage limits, on both the Free and Paid plans. See the [Free Tier page](https://aws.amazon.com/free/) for each service's limits.
+
+Limitations:
+
+- **New customers only:** you aren't eligible if you have or have had an AWS account. Credits can't be transferred.
+- **Short duration:** the Free plan ends 6 months after you open the account, or sooner if your credits run out.
+- **Data is deleted:** when the Free plan ends, AWS suspends the account. AWS keeps your data for 90 days and then permanently deletes the account and its contents unless you upgrade to the Paid plan. Don't keep data you need on a Free plan account.
+- **Limited services:** the Free plan includes only some AWS services, and it's meant for evaluation, not for sensitive data.
+- **Monthly limits:** Always Free allowances reset each month, and unused amounts don't carry over.
+- **Charges on the Paid plan:** after you upgrade, standard rates apply to usage beyond your credits. Set a monthly spend limit to avoid surprise bills.
+
+For details, see the [Free Tier FAQs](https://aws.amazon.com/free/free-tier-faqs/) and the [Free Tier terms](https://aws.amazon.com/free/terms/). The FAQs and terms disagree on when credits expire, so check the expiry date in your account's billing settings.
